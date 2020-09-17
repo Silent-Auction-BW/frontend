@@ -59,7 +59,7 @@ const ItemForm = () => {
     }
     
     return (
-        <div>
+        <div className="form">
             <h2>Add Item</h2>
             <form onSubmit={handleSubmit}>
                 <input type="text"
@@ -96,6 +96,7 @@ const ItemForm = () => {
                         placeholder="description"
                         value={item.description}
                          />
+                         <button>Add Item</button>
 
             </form>
 
