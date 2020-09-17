@@ -8,7 +8,7 @@ const initialItem = {
     description: ""
 };
 
-const itemForm = props => {
+const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
 
@@ -16,22 +16,26 @@ const itemForm = props => {
 
         ev.persist();
         var value = ev.target.value;
+
         //Converting the value of price to integer
+
         if (ev.target.value === 'price') {
             value = parseInt(value, 10);
         }
 
         //Setting the values to setItem using spread operator
+
         SetItem({
             ...item,
             [ev.target.name]: value
         });
         
 
-    }
+    };
     const handleSubmit = e => {
-        ev.preventDefault();
+        e.preventDefault();
         console.log("Items",item);
+        //Waiting for axios link to posted
         axios.post("",item);
         console.log("Item got posted",item);
         
@@ -70,4 +74,6 @@ const itemForm = props => {
         </div>
     )
 
-}
+};
+
+export default ItemForm;
