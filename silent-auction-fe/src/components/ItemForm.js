@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const initialItem = {
     name: "",
     price: "",
-    imageUrl: "",
+    imageUrl: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
     description: ""
 };
 
@@ -36,10 +37,27 @@ const ItemForm = () => {
         e.preventDefault();
         console.log("Items",item);
         //Waiting for axios link to posted
-        axios.post("",item);
+      //  axios.post("",item);
         console.log("Item got posted",item);
         
     }
+    const imageHandler=e=>{
+        const reader=new FileReader();
+        reader.onload=()=>{
+            // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
+            if(reader.readyState===2){
+                SetItem({
+                    ...item,
+                    imageUrl:reader.result
+                    
+                })
+                console.log("item",item);
+                
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    }
+    
     return (
         <div>
             <h2>Add Item</h2>
@@ -56,12 +74,22 @@ const ItemForm = () => {
                         placeholder="Price"
                         value={item.price}
                          />
+               {/*
                 <input type="text"
                         name="imageUrl"
                         onChange={changeHandler}
                         placeholder="imageUrl"
                         value={item.imageUrl}
                          />
+               */} 
+               <img src={item.imageUrl} alt="Upload Image"></img>
+               <input type="file"
+                    name="imageurl"
+                    accept="image/*"
+                    id="input"
+                    onChange={imageHandler}/>
+                   
+
                 <input type="text"
                         name="description"
                         onChange={changeHandler}
