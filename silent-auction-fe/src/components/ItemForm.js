@@ -48,7 +48,7 @@ const ItemForm = () => {
             if(reader.readyState===2){
                 SetItem({
                     ...item,
-                    imageUrl:reader.result
+                   imageUrl:reader.result
                     
                 })
                 console.log("item",item);
