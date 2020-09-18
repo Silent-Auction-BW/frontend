@@ -2,7 +2,7 @@ import React from 'react';
 
 const SignupForm = (props) => {
   return (
-    <>
+    <div>
       <h1>This is the Signup page</h1>
       <form>
         <label htmlFor="username">
@@ -46,7 +46,7 @@ const SignupForm = (props) => {
         <button type="submit">Sign Up</button>
         <button>Login</button>
       </form>
-    </>
+    </div>
   );
 }
 
