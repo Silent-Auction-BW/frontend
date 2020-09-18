@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import {NavLink }from "react-router-dom"
 import './App.css';
 import ItemForm from "./components/ItemForm";
+import LoginForm from './components/login';
+import SignupForm from './components/signup';
 import { Route, Link, Switch } from "react-router-dom";
 import BidderCard from './Bidder-Cards';
 import SellerCard from './Seller-Cards';
@@ -61,14 +63,16 @@ function App() {
         <ul className="navbar">
           <Link to="/BidderCard">Bidder Dashborad</Link>
           <Link to="/SellerCard">Seller Dashborad</Link>
-          <NavLink exact to ="/item-form">Add Item</NavLink>
-       
+          <NavLink exact to="/item-form">
+            Add Item
+          </NavLink>
         </ul>
         <Switch>
-
           <Route exact path="/BidderCard" component={BidderCard} />
           <Route path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
+          <Route path="/login" component={LoginForm}></Route>
+          <Route path="/signup" component={SignupForm}></Route>
         </Switch>
       </div>
     </ItemContext.Provider>
