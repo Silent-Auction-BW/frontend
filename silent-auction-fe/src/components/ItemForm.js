@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 
 const initialItem = {
@@ -8,10 +9,22 @@ const initialItem = {
     imageUrl: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
     description: ""
 };
+const Uploadimg = styled.img`
+width:200px;
+height: 200px;`
+
+const Form=styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+max-width: 300px;
+margin: 0 auto;
+padding-top:30px;`
 
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
+   
 
     const changeHandler = ev => {
 
@@ -59,8 +72,8 @@ const ItemForm = () => {
     }
     
     return (
-        <div className="form">
-            <h2>Add Item</h2>
+        <Form>
+           
             <form onSubmit={handleSubmit}>
                 <input type="text"
                         name="name"
@@ -82,7 +95,7 @@ const ItemForm = () => {
                         value={item.imageUrl}
                          />
                */} 
-               <img src={item.imageUrl} alt="Upload Image"></img>
+               <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
                <input type="file"
                     name="imageurl"
                     accept="image/*"
@@ -100,7 +113,7 @@ const ItemForm = () => {
 
             </form>
 
-        </div>
+        </Form>
     )
 
 };
