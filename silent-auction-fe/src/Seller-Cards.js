@@ -2,10 +2,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from './contexts/ItemContext';
+import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 const SellerCard = prop => {
-    const [itemData, setUserData] = useState([])
-
+    const [itemData, setUserData] = useState([]);
+    const {push}=useHistory();
+    //Finding id of the itemList
+    /*
+    const item=prop.itemData.find(
+        (itemId)=> (item.id)===prop.match.params.id
+    )
+*/
     const Container = styled.div`
     border: 1px #80808059 solid;
     border-radius: 10px;
@@ -57,6 +65,17 @@ const SellerCard = prop => {
     useEffect(() => {
         setUserData(itemProp)
     }, [])
+    const deleteItem=(e)=>{
+        e.preventDefault();
+        axios
+        .delete(``)
+        .then((res)=>{
+            prop.setUserData(res.data);
+            /* */
+        })
+        .catch((err)=>
+        console.log("delete error",err));
+    }
 
     return (
         <Page>
@@ -77,6 +96,10 @@ const SellerCard = prop => {
                             <div>
                                 <Timer>{item.timer}</Timer>
                                 {/* <PlaceBid item={item}/> */}
+                                {/*Edit */}
+                                {/*Delete*/}
+                                <button onClick={editItem}>Edit</button>
+                                <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>

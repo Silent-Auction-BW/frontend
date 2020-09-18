@@ -60,8 +60,8 @@ const ItemForm = () => {
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
             if(reader.readyState===2){
                 SetItem({
-                    ...item,
-                   imageUrl:reader.result
+                   ...item,
+                    imageUrl:reader.result
                     
                 })
                 console.log("item",item);
