@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import styled from "styled-components";
 
 
@@ -13,7 +13,7 @@ const Uploadimg = styled.img`
 width:200px;
 height: 200px;`
 
-const Form=styled.div`
+const Form = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
@@ -24,7 +24,7 @@ padding-top:30px;`
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
-   
+
 
     const changeHandler = ev => {
 
@@ -43,73 +43,73 @@ const ItemForm = () => {
             ...item,
             [ev.target.name]: value
         });
-        
+
 
     };
     const handleSubmit = e => {
         e.preventDefault();
-        console.log("Items",item);
+        console.log("Items", item);
         //Waiting for axios link to posted
-      //  axios.post("",item);
-        console.log("Item got posted",item);
-        
+        //  axios.post("",item);
+        console.log("Item got posted", item);
+
     }
-    const imageHandler=e=>{
-        const reader=new FileReader();
-        reader.onload=()=>{
+    const imageHandler = e => {
+        const reader = new FileReader();
+        reader.onload = () => {
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
-            if(reader.readyState===2){
+            if (reader.readyState === 2) {
                 SetItem({
-                    ...item,
-                   imageUrl:reader.result
-                    
+
+                    imageUrl: reader.result
+
                 })
-                console.log("item",item);
-                
+                console.log("item", item);
+
             }
         }
         reader.readAsDataURL(e.target.files[0])
     }
-    
+
     return (
         <Form>
-           
+
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                        name="name"
-                        onChange={changeHandler}
-                        placeholder="name"
-                        value={item.name}
-                         />
+                    name="name"
+                    onChange={changeHandler}
+                    placeholder="name"
+                    value={item.name}
+                />
                 <input type="text"
-                        name="price"
-                        onChange={changeHandler}
-                        placeholder="Price"
-                        value={item.price}
-                         />
-               {/*
+                    name="price"
+                    onChange={changeHandler}
+                    placeholder="Price"
+                    value={item.price}
+                />
+                {/*
                 <input type="text"
                         name="imageUrl"
                         onChange={changeHandler}
                         placeholder="imageUrl"
                         value={item.imageUrl}
                          />
-               */} 
-               <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
-               <input type="file"
+               */}
+                <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+                <input type="file"
                     name="imageurl"
                     accept="image/*"
                     id="input"
-                    onChange={imageHandler}/>
-                   
+                    onChange={imageHandler} />
+
 
                 <input type="text"
-                        name="description"
-                        onChange={changeHandler}
-                        placeholder="description"
-                        value={item.description}
-                         />
-                         <button>Add Item</button>
+                    name="description"
+                    onChange={changeHandler}
+                    placeholder="description"
+                    value={item.description}
+                />
+                <button>Add Item</button>
 
             </form>
 
