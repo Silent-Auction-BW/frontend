@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import UploadImage from "./UploadImage";
 
 
 const initialItem = {
@@ -81,7 +82,7 @@ const ItemForm = () => {
                         placeholder="name"
                         value={item.name}
                          />
-                <input type="text"
+                <input type="number"
                         name="price"
                         onChange={changeHandler}
                         placeholder="Price"
@@ -95,12 +96,17 @@ const ItemForm = () => {
                         value={item.imageUrl}
                          />
                */} 
-               <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+              
+                  <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+                 
                <input type="file"
                     name="imageurl"
                     accept="image/*"
                     id="input"
                     onChange={imageHandler}/>
+                     
+              
+             
                    
 
                 <input type="text"
