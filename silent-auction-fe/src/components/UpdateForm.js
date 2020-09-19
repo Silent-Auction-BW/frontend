@@ -67,7 +67,7 @@ const UpdateForm=(props)=>{
         reader.onload=()=>{
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
             if(reader.readyState===2){
-                SetItem({
+                setItem({
                    ...item,
                     imageUrl:reader.result
                     
