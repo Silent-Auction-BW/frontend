@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import UploadImage from "./UploadImage";
+import DateTimeForm from "./DateTimeForm";
 
 
 const initialItem = {
     name: "",
     price: "",
     imageUrl: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
-    description: ""
+    description: "",
+    auctionTime:""
 };
 const Uploadimg = styled.img`
 width:200px;
@@ -107,7 +109,7 @@ const ItemForm = () => {
                      
               
              
-                   
+                   <DateTimeForm item={item} setItem={SetItem}/>
 
                 <input type="text"
                         name="description"

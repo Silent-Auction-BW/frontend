@@ -100,7 +100,9 @@ const SellerCard = prop => {
                             <div>
                                 <Timer>{item.timer}</Timer>
                                 {/* <PlaceBid item={item}/> */}
-                                <DateTimeForm/>
+                              {
+                            /*  <DateTimeForm/>*/
+                              }  
                                 {/*Edit */}
                                 {/*Delete*/}
                                 <button onClick={editItem}>Edit</button>
