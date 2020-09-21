@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom"
 import './App.css';
 import ItemForm from "./components/ItemForm";
+import LoginForm from './components/login';
+import SignupForm from './components/signup';
 import { Route, Link, Switch } from "react-router-dom";
 import BidderCard from './components/Bidder-Cards';
 import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
 import { axiosWithAuth } from './axiosAuth';
+import UpdateForm from "./components/UpdateForm";
 function App() {
 
   const [itemData, SetItemData] = useState([
@@ -69,17 +72,22 @@ function App() {
         <ul className="navbar">
           <Link to="/BidderCard">Bidder Dashborad</Link>
           <Link to="/SellerCard">Seller Dashborad</Link>
-          <NavLink exact to="/item-form">Add Item</NavLink>
-
+          <NavLink exact to="/item-form">
+            Add Item
+          </NavLink>
         </ul>
         <Switch>
-
           <Route exact path="/BidderCard" component={BidderCard} />
           <Route path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
+          <Route path="/update-item/:id"
+            render={() => <UpdateForm item={itemData} setItem={SetItemData} />} />
+
+          <Route path="/login" component={LoginForm}></Route>
+          <Route path="/signup" component={SignupForm}></Route>
         </Switch>
       </div>
-    </ItemContext.Provider>
+    </ItemContext.Provider >
   );
 }
 

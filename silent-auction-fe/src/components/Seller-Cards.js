@@ -2,9 +2,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
-
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import DateTimeForm from "../components/DateTimeForm";
 
 const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
@@ -77,6 +77,9 @@ const SellerCard = prop => {
             .catch((err) =>
                 console.log("delete error", err));
     }
+    const editItem = (e) => {
+        push(`/update-item/${itemData.id}`);
+    }
 
     return (
         <Page>
@@ -97,6 +100,9 @@ const SellerCard = prop => {
                             <div>
                                 <Timer>{item.timer}</Timer>
                                 {/* <PlaceBid item={item}/> */}
+                                {
+                                    /*  <DateTimeForm/>*/
+                                }
                                 {/*Edit */}
                                 {/*Delete*/}
                                 {/* <button onClick={editItem}>Edit</button> */}
