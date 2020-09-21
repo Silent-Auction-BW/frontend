@@ -2,13 +2,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import DateTimeForm from "../components/DateTimeForm";
 
 const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
-    const {push}=useHistory();
+    const { push } = useHistory();
     //Finding id of the itemList
     /*
     const item=prop.itemData.find(
@@ -66,18 +66,18 @@ const SellerCard = prop => {
     useEffect(() => {
         setUserData(itemProp)
     }, [])
-    const deleteItem=(e)=>{
+    const deleteItem = (e) => {
         e.preventDefault();
         axios
-        .delete(``)
-        .then((res)=>{
-            prop.setUserData(res.data);
-            /* */
-        })
-        .catch((err)=>
-        console.log("delete error",err));
+            .delete(``)
+            .then((res) => {
+                prop.setUserData(res.data);
+                /* */
+            })
+            .catch((err) =>
+                console.log("delete error", err));
     }
-    const editItem =(e)=>{
+    const editItem = (e) => {
         push(`/update-item/${itemData.id}`);
     }
 
@@ -100,9 +100,9 @@ const SellerCard = prop => {
                             <div>
                                 <Timer>{item.timer}</Timer>
                                 {/* <PlaceBid item={item}/> */}
-                              {
-                            /*  <DateTimeForm/>*/
-                              }  
+                                {
+                                    /*  <DateTimeForm/>*/
+                                }
                                 {/*Edit */}
                                 {/*Delete*/}
                                 {/* <button onClick={editItem}>Edit</button> */}
