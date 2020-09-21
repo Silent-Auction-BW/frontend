@@ -105,7 +105,7 @@ const SellerCard = prop => {
                               }  
                                 {/*Edit */}
                                 {/*Delete*/}
-                                <button onClick={editItem}>Edit</button>
+                                {/* <button onClick={editItem}>Edit</button> */}
                                 <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
