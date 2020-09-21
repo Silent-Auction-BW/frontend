@@ -21,7 +21,7 @@ const Form = styled.div`
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
 const Input = styled.input`
@@ -29,10 +29,6 @@ const Input = styled.input`
   border: 1px solid #28afb0;
   border-radius: 5px;
 `;
-
-const inputContainer = styled.div`
-  margin-bottom: 30px;
-`
 
 const Button = styled.button`
   background-color: #28AFB0;

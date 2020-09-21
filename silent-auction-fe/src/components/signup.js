@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import styled from "styled-components";
 
 const SignupForm = (props) => {
+  const [signupData, setSignupData] = useState({
+    username: "",
+    password: "",
+    name: "",
+    email: "",
+    role: "",
+  });
+
   return (
     <div>
-      <h1>This is the Signup page</h1>
+      <h1>Sign Up</h1>
       <form>
         <label htmlFor="username">
           <input
@@ -40,6 +51,17 @@ const SignupForm = (props) => {
           name="email"
           id="email"
           placeholder="Email"/>
+        </label>
+        <br/>
+
+        <label htmlFor="role">
+          <select 
+          name="role" 
+          id="role">
+            <option value="">Select an Option</option>
+            <option value="bidder">Bidder</option>
+            <option value="seller">Seller</option>
+          </select>
         </label>
         <br/>
         
