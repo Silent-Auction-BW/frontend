@@ -4,14 +4,24 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  box-shadow: 5px 5px 10px black;
+  display: flex;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 30px;
+  max-width: 600px;
+`
+
+const Form = styled.div`
   background-color: #19647E;
   border: 1px solid black;
-  box-shadow: 5px 5px 10px black;
   color: #F4F9E9;
   margin: 0 auto;
-  max-width: 300px;
-  margin-top: 30px;
+  width: 300px;
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 
 const Input = styled.input`
@@ -19,6 +29,10 @@ const Input = styled.input`
   border: 1px solid #28afb0;
   border-radius: 5px;
 `;
+
+const inputContainer = styled.div`
+  margin-bottom: 30px;
+`
 
 const Button = styled.button`
   background-color: #28AFB0;
@@ -33,6 +47,11 @@ const Button = styled.button`
     background-color: #550C18;
   }
 `;
+
+const Img = styled.img`
+  max-width: 300px;
+  object-fit: cover
+`
 
 const LoginForm = (props) => {
   const [loginData, setLoginData] = useState({
@@ -68,8 +87,13 @@ const LoginForm = (props) => {
 
   return (
     <Container>
-      <h1>Login</h1>
+      <Img 
+      src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1505&q=80"
+      alt="Auction Gavel"/>
+    <Form>
+      <h1>Sign In</h1>
       <form onSubmit={login}>
+        {/* <inputContainer> */}
         <label htmlFor="username">
           <Input 
           type="text" 
@@ -91,6 +115,7 @@ const LoginForm = (props) => {
           value={loginData.password} />
         </label>
         <br/>
+        {/* </inputContainer> */}
 
         <Button type="submit">Login</Button>
 
@@ -98,6 +123,7 @@ const LoginForm = (props) => {
           <Button onClick={signUp} >Sign Up</Button>
         </div>
       </form>
+    </Form>
     </Container>
   );
 }
