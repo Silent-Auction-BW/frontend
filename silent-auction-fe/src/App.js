@@ -72,6 +72,8 @@ function App() {
         <ul className="navbar">
           <Link to="/BidderCard">Bidder Dashborad</Link>
           <Link to="/SellerCard">Seller Dashborad</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
           <NavLink exact to="/item-form">
             Add Item
           </NavLink>
