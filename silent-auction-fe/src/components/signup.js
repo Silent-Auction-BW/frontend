@@ -17,10 +17,30 @@ const SignupForm = (props) => {
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   }
 
+  const signup = e => {
+    e.preventDefault();
+
+    axios
+      .post(`https://reqres.in/api/users`, signupData)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      setSignupData({
+        username: "",
+        password: "",
+        name: "",
+        email: "",
+        role: ""
+      });
+  }
+
   return (
     <div>
       <h1>Sign Up</h1>
-      <form>
+      <form onSubmit={signup}>
         <label htmlFor="username">
           <input
             type="text"
