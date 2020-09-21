@@ -1,7 +1,7 @@
 
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
-import { ItemContext } from './contexts/ItemContext';
+import { ItemContext } from '../contexts/ItemContext';
 
 const BidderCard = prop => {
     const [itemData, setUserData] = useState([])
