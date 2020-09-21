@@ -11,6 +11,11 @@ const SignupForm = (props) => {
     email: "",
     role: "",
   });
+  
+  const inputChange = e => {
+    e.persist();
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  }
 
   return (
     <div>
@@ -22,6 +27,8 @@ const SignupForm = (props) => {
             name="username"
             id="username"
             placeholder="Username"
+            onChange={inputChange}
+            value={signupData.username}
           />
         </label>
         <br />
@@ -32,6 +39,8 @@ const SignupForm = (props) => {
             name="password"
             id="password"
             placeholder="Password"
+            onChange={inputChange}
+            value={signupData.password}
           />
         </label>
         <br />
@@ -41,7 +50,11 @@ const SignupForm = (props) => {
           type="text" 
           name="name" 
           id="name" 
-          placeholder="Name"/>
+          placeholder="Name"
+          onChange={inputChange}
+          value={signupData.name}
+          />
+          
         </label>
         <br/>
 
@@ -50,14 +63,20 @@ const SignupForm = (props) => {
           type="text"
           name="email"
           id="email"
-          placeholder="Email"/>
+          placeholder="Email"
+          onChange={inputChange}
+          value={signupData.email}
+          />
         </label>
         <br/>
 
         <label htmlFor="role">
           <select 
           name="role" 
-          id="role">
+          id="role"
+          onChange={inputChange}
+          value={signupData.role}
+          >
             <option value="">Select an Option</option>
             <option value="bidder">Bidder</option>
             <option value="seller">Seller</option>
