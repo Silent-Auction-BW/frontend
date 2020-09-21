@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
   margin-top: 30px;
   max-width: 600px;
-`
+`;
 
 const Form = styled.div`
   background-color: #19647E;
@@ -47,7 +47,7 @@ const Button = styled.button`
 const Img = styled.img`
   max-width: 300px;
   object-fit: cover
-`
+`;
 
 const LoginForm = (props) => {
   const [loginData, setLoginData] = useState({
