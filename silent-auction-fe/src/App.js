@@ -5,9 +5,10 @@ import ItemForm from "./components/ItemForm";
 import LoginForm from './components/login';
 import SignupForm from './components/signup';
 import { Route, Link, Switch } from "react-router-dom";
-import BidderCard from './Bidder-Cards';
-import SellerCard from './Seller-Cards';
+import BidderCard from './components/Bidder-Cards';
+import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
+import UpdateForm from "./components/UpdateForm";
 function App() {
 
   const [itemData, SetItemData] = useState([
@@ -71,6 +72,9 @@ function App() {
           <Route exact path="/BidderCard" component={BidderCard} />
           <Route path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
+          <Route path="/update-item/:id"
+                render={()=><UpdateForm item={itemData} setItem={SetItemData}/>} />
+               
           <Route path="/login" component={LoginForm}></Route>
           <Route path="/signup" component={SignupForm}></Route>
         </Switch>

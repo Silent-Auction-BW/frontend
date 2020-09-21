@@ -1,11 +1,20 @@
 
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
-import { ItemContext } from './contexts/ItemContext';
+import { ItemContext } from '../contexts/ItemContext';
+import {useHistory} from "react-router-dom";
+import axios from "axios";
+import DateTimeForm from "../components/DateTimeForm";
 
-const BidderCard = prop => {
-    const [itemData, setUserData] = useState([])
-
+const SellerCard = prop => {
+    const [itemData, setUserData] = useState([]);
+    const {push}=useHistory();
+    //Finding id of the itemList
+    /*
+    const item=prop.itemData.find(
+        (itemId)=> (item.id)===prop.match.params.id
+    )
+*/
     const Container = styled.div`
     border: 1px #80808059 solid;
     border-radius: 10px;
@@ -47,10 +56,7 @@ const BidderCard = prop => {
     display: flex;
     font-weight: 600;
     `
-    const Seller = styled.div`
-    display: flex;
-    font-weight: 600;
-    `
+
 
     const Des = styled.div`
     text-align: left;
@@ -60,6 +66,20 @@ const BidderCard = prop => {
     useEffect(() => {
         setUserData(itemProp)
     }, [])
+    const deleteItem=(e)=>{
+        e.preventDefault();
+        axios
+        .delete(``)
+        .then((res)=>{
+            prop.setUserData(res.data);
+            /* */
+        })
+        .catch((err)=>
+        console.log("delete error",err));
+    }
+    const editItem =(e)=>{
+        push(`/update-item/${itemData.id}`);
+    }
 
     return (
         <Page>
@@ -69,9 +89,7 @@ const BidderCard = prop => {
                     <Container key={index}>
                         <ImageContainer src={item.image} alt='item-imag' />
                         <DataContainer>
-                            <Seller>
-                                <div>Seller: {item.name}</div>
-                            </Seller>
+
                             <Price>
                                 {item.price.bidState == true ? <><div>Current Bid: ${item.price.price}</div><div>Bidder: {item.biderName}</div></> : <div>${item.price.price}</div>}
                             </Price>
@@ -82,6 +100,13 @@ const BidderCard = prop => {
                             <div>
                                 <Timer>{item.timer}</Timer>
                                 {/* <PlaceBid item={item}/> */}
+                              {
+                            /*  <DateTimeForm/>*/
+                              }  
+                                {/*Edit */}
+                                {/*Delete*/}
+                                {/* <button onClick={editItem}>Edit</button> */}
+                                <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>
@@ -93,4 +118,4 @@ const BidderCard = prop => {
 
 }
 
-export default BidderCard;
+export default SellerCard;
