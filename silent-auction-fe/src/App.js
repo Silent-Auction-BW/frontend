@@ -72,7 +72,7 @@ function App() {
   ])
 
   useEffect(() => {
-    axiosWithAuth().post('/items/:id')
+    axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
       .then(res => {
         SetItemData(res);
       })
