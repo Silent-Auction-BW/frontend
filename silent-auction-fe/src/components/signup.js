@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import * as yup from "yup";
 
 const Container = styled.div`
   box-shadow: 5px 5px 10px black;
@@ -13,9 +14,9 @@ const Container = styled.div`
 `;
 
 const Form = styled.div`
-  background-color: #19647E;
+  background-color: #19647e;
   border: 1px solid black;
-  color: #F4F9E9;
+  color: #f4f9e9;
   margin: 0 auto;
   width: 300px;
   padding-bottom: 30px;
@@ -34,26 +35,46 @@ const Select = styled.select`
   background-color: #f4f9e9;
   border: none;
   border-radius: 5px;
-`
+`;
 
 const Button = styled.button`
-  background-color: #28AFB0;
+  background-color: #28afb0;
   border: none;
   border-radius: 25px;
-  color: #F4F9E9;
+  color: #f4f9e9;
   font-size: 1.2rem;
   margin: 10px 0;
   padding: 3px 10px;
-
   &:hover {
-    background-color: #550C18;
+    background-color: #550c18;
   }
 `;
 
 const Img = styled.img`
   max-width: 300px;
-  object-fit: cover
+  object-fit: cover;
 `;
+
+const Error = styled.p`
+  color: orange;
+  margin: 0;
+`;
+
+const formSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required("Must include your name.")
+    .min(2, "Names must include at least 2 characters"),
+  password: yup
+    .string()
+    .required("Must include your password.")
+    .min(4, "Password must be at least 4 characters"),
+  role: yup.string().oneOf(["bidder", "seller"], "Please choose a role."),
+  email: yup
+    .string()
+    .email("Must include a valid email")
+    .required("Must include your email."),
+});
 
 const SignupForm = (props) => {
   const [signupData, setSignupData] = useState({
@@ -63,40 +84,71 @@ const SignupForm = (props) => {
     email: "",
   });
 
-  const inputChange = e => {
-    e.persist();
-    setSignupData({ ...signupData, [e.target.name]: e.target.value });
-  }
+  const [errorState, setErrorState] = useState({
+    username: "",
+    password: "",
+    role: "",
+    email: "",
+  });
 
-  const signup = e => {
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    formSchema.isValid(signupData).then((valid) => {
+      setButtonDisabled(!valid);
+    });
+  }, [signupData]);
+
+  const validate = (e) => {
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: "",
+        });
+      })
+      .catch((err) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: err.errors[0],
+        });
+      });
+  };
+
+  const inputChange = (e) => {
+    e.persist();
+    validate(e);
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  };
+
+  const signup = (e) => {
     e.preventDefault();
 
     axios
-      .post(`https://bw-silent-auction-pt.herokuapp.com/register`, signupData)
-      .then(res => {
-        console.log('signup res', res);
+      .post(`https://reqres.in/api/users`, signupData)
+      .then((res) => {
+        console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
     setSignupData({
       username: "",
       password: "",
-      role: "",
       email: "",
+      role: "",
     });
-  }
+  };
 
   const history = useHistory();
   const loginReDirect = () => {
-    history.push("/login")
+    history.push("/login");
   };
-
-
 
   return (
     <Container>
-      {console.log('signupData', signupData)}
       <Img
         src="https://images.unsplash.com/photo-1592500305630-419da01a7c33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
         alt="Bidders Sign"
@@ -114,6 +166,9 @@ const SignupForm = (props) => {
               value={signupData.username}
             />
           </label>
+          {errorState.username.length > 0 ? (
+            <Error>{errorState.username}</Error>
+          ) : null}
           <br />
 
           <label htmlFor="password">
@@ -126,6 +181,9 @@ const SignupForm = (props) => {
               value={signupData.password}
             />
           </label>
+          {errorState.password.length > 0 ? (
+            <Error>{errorState.password}</Error>
+          ) : null}
           <br />
 
           {/* <label htmlFor="name">
@@ -138,8 +196,8 @@ const SignupForm = (props) => {
           value={signupData.name}
           />
           
-        </label> */}
-          <br />
+        </label>
+        <br/> */}
 
           <label htmlFor="email">
             <Input
@@ -151,6 +209,9 @@ const SignupForm = (props) => {
               value={signupData.email}
             />
           </label>
+          {errorState.email.length > 0 ? (
+            <Error>{errorState.email}</Error>
+          ) : null}
           <br />
 
           <label htmlFor="role">
@@ -165,9 +226,12 @@ const SignupForm = (props) => {
               <option value="seller">Seller</option>
             </Select>
           </label>
+          {errorState.role.length > 0 ? <Error>{errorState.role}</Error> : null}
           <br />
 
-          <Button type="submit">Sign Up</Button>
+          <Button disabled={buttonDisabled} type="submit">
+            Sign Up
+          </Button>
 
           <div>
             <Button onClick={loginReDirect}>Login</Button>
@@ -176,6 +240,6 @@ const SignupForm = (props) => {
       </Form>
     </Container>
   );
-}
+};
 
 export default SignupForm;
