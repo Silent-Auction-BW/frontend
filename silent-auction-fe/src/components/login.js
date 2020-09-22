@@ -58,12 +58,12 @@ const Error = styled.p`
 const formSchema = yup.object().shape({
   username: yup
     .string()
-    .min(2, "Names must be at least 2 characters long.")
-    .required("Must include your name."),
+    .required("Must include your name.")
+    .min(2, "Names must be at least 2 characters long."),
   password: yup
     .string()
+    .required("Must include your password.")
     .min(4, "Password must be at least 4 characters")
-    .required("Must include your password."),
 });
 
 const LoginForm = (props) => {

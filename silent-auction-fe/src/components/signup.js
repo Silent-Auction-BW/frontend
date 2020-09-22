@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import * as yup from "yup";
 
 const Container = styled.div`
   box-shadow: 5px 5px 10px black;
@@ -55,17 +56,73 @@ const Img = styled.img`
   object-fit: cover
 `;
 
+const Error = styled.p`
+  color: orange;
+  margin: 0;
+`
+
+const formSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required("Must include your name.")
+    .min(2, "Names must include at least 2 characters"),
+  password: yup
+    .string()
+    .required("Must include your password.")
+    .min(4, "Password must be at least 4 characters"),
+  role: yup
+    .string()
+    .oneOf(['bidder', 'seller'], "Please choose a role."),
+  email: yup
+    .string()
+    .email("Must include a valid email")
+    .required("Must include your email."),
+});
+
 const SignupForm = (props) => {
   const [signupData, setSignupData] = useState({
     username: "",
     password: "",
-    name: "",
-    email: "",
     role: "",
+    email: "",
   });
+
+  const [errorState, setErrorState] = useState({
+    username: "",
+    password: "",
+    role: "",
+    email: "",
+  });
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    formSchema.isValid(signupData).then((valid) => {
+      setButtonDisabled(!valid);
+    });
+  }, [signupData]);
+
+  const validate = (e) => {
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: "",
+        });
+      })
+      .catch((err) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: err.errors[0],
+        });
+      });
+  };
   
   const inputChange = e => {
     e.persist();
+    validate(e);
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   }
 
@@ -83,7 +140,6 @@ const SignupForm = (props) => {
       setSignupData({
         username: "",
         password: "",
-        name: "",
         email: "",
         role: ""
       });
@@ -113,6 +169,9 @@ const SignupForm = (props) => {
             value={signupData.username}
           />
         </label>
+        {errorState.username.length > 0 ? (
+          <Error>{errorState.username}</Error>
+        ) : null}
         <br />
 
         <label htmlFor="password">
@@ -125,9 +184,12 @@ const SignupForm = (props) => {
             value={signupData.password}
           />
         </label>
+        {errorState.password.length > 0 ? (
+          <Error>{errorState.password}</Error>
+        ) : null}
         <br />
 
-        <label htmlFor="name">
+        {/* <label htmlFor="name">
           <Input 
           type="text" 
           name="name" 
@@ -138,7 +200,7 @@ const SignupForm = (props) => {
           />
           
         </label>
-        <br/>
+        <br/> */}
 
         <label htmlFor="email">
           <Input 
@@ -150,6 +212,9 @@ const SignupForm = (props) => {
           value={signupData.email}
           />
         </label>
+        {errorState.email.length > 0 ? (
+          <Error>{errorState.email}</Error>
+        ) : null}
         <br/>
 
         <label htmlFor="role">
@@ -164,9 +229,12 @@ const SignupForm = (props) => {
             <option value="seller">Seller</option>
           </Select>
         </label>
+        {errorState.role.length > 0 ? (
+          <Error>{errorState.role}</Error>
+        ) : null}
         <br/>
         
-        <Button type="submit">Sign Up</Button>
+        <Button disabled={buttonDisabled} type="submit">Sign Up</Button>
 
         <div>
           <Button onClick={loginReDirect}>Login</Button>
