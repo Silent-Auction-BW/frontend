@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import * as yup from 'yup';
 
 const Container = styled.div`
   box-shadow: 5px 5px 10px black;
@@ -49,16 +50,66 @@ const Img = styled.img`
   object-fit: cover
 `;
 
+const Error = styled.p`
+  color: orange;
+  margin: 0;
+`
+
+const formSchema = yup.object().shape({
+  username: yup
+    .string()
+    .min(2, "Names must be at least 2 characters long.")
+    .required("Must include your name."),
+  password: yup
+    .string()
+    .min(4, "Password must be at least 4 characters")
+    .required("Must include your password."),
+});
+
 const LoginForm = (props) => {
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
   });
 
+  const [errorState, setErrorState] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    formSchema
+      .isValid(loginData)
+      .then(valid => {
+        setButtonDisabled(!valid)
+      });
+  }, [loginData])
+
   const inputChange = e => {
     e.persist();
+    validate(e);
     setLoginData({...loginData, [e.target.name]: e.target.value});
   }
+
+  const validate = (e) => {
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: "",
+        });
+      })
+      .catch((err) => {
+        setErrorState({
+          ...errorState,
+          [e.target.name]: err.errors[0],
+        });
+      });
+  };
 
   const login = e => {
     e.preventDefault();
@@ -89,7 +140,6 @@ const LoginForm = (props) => {
     <Form>
       <h1>Sign In</h1>
       <form onSubmit={login}>
-        {/* <inputContainer> */}
         <label htmlFor="username">
           <Input 
           type="text" 
@@ -99,6 +149,9 @@ const LoginForm = (props) => {
           onChange={inputChange} 
           value={loginData.username}/>
         </label>
+        {errorState.username.length > 0 ? (
+          <Error>{errorState.username}</Error>
+        ) : null}
         <br/>
 
         <label htmlFor="password">
@@ -110,10 +163,12 @@ const LoginForm = (props) => {
           onChange={inputChange}
           value={loginData.password} />
         </label>
+        {errorState.password.length > 0 ? (
+          <Error>{errorState.password}</Error>
+        ) : null}
         <br/>
-        {/* </inputContainer> */}
 
-        <Button type="submit">Login</Button>
+        <Button disabled={buttonDisabled} type="submit">Login</Button>
 
         <div>
           <Button onClick={signUp} >Sign Up</Button>
