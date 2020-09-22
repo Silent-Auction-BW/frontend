@@ -127,9 +127,9 @@ const SignupForm = (props) => {
     e.preventDefault();
 
     axios
-      .post(`https://reqres.in/api/users`, signupData)
+      .post(`https://bw-silent-auction-pt.herokuapp.com/register`, signupData)
       .then((res) => {
-        console.log(res);
+        console.log("signup res", res);
       })
       .catch((err) => {
         console.log(err);
