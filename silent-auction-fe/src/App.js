@@ -10,6 +10,17 @@ import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
 import { axiosWithAuth } from './axiosAuth';
 import UpdateForm from "./components/UpdateForm";
+import styled from'styled-components';
+
+const NavBar = styled.header`
+  display: flex;
+  justify-content: center;
+  background-color: #19647e;
+  margin: 0;
+  padding-bottom: 10px;
+  height: 50px;
+`;
+
 function App() {
 
   const [itemData, SetItemData] = useState([
@@ -69,27 +80,31 @@ function App() {
   return (
     <ItemContext.Provider value={itemData}>
       <div className="App">
-        <ul className="navbar">
-          <Link to="/BidderCard">Bidder Dashborad</Link>
-          <Link to="/SellerCard">Seller Dashborad</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-          <NavLink exact to="/item-form">
-            Add Item
-          </NavLink>
-        </ul>
+        <NavBar>
+          <ul className="navbar">
+            <Link to="/BidderCard">Bidder Dashborad</Link>
+            <Link to="/SellerCard">Seller Dashborad</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
+            <NavLink exact to="/item-form">
+              Add Item
+            </NavLink>
+          </ul>
+        </NavBar>
         <Switch>
           <Route exact path="/BidderCard" component={BidderCard} />
           <Route path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
-          <Route path="/update-item/:id"
-            render={() => <UpdateForm item={itemData} setItem={SetItemData} />} />
+          <Route
+            path="/update-item/:id"
+            render={() => <UpdateForm item={itemData} setItem={SetItemData} />}
+          />
 
           <Route path="/login" component={LoginForm}></Route>
           <Route path="/signup" component={SignupForm}></Route>
         </Switch>
       </div>
-    </ItemContext.Provider >
+    </ItemContext.Provider>
   );
 }
 
