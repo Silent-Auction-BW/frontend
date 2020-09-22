@@ -82,8 +82,8 @@ function App() {
       <div className="App">
         <NavBar>
           <ul className="navbar">
-            <Link to="/BidderCard">Bidder Dashborad</Link>
-            <Link to="/SellerCard">Seller Dashborad</Link>
+            <Link to="/BidderCard">Bidder Dashboard</Link>
+            <Link to="/SellerCard">Seller Dashboard</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
             <NavLink exact to="/item-form">
