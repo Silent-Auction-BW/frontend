@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+
 import styled from 'styled-components';
+import { axiosWithAuth } from '../axiosAuth';
 import * as yup from 'yup';
 
 const Container = styled.div`
@@ -90,7 +91,7 @@ const LoginForm = (props) => {
   const inputChange = e => {
     e.persist();
     validate(e);
-    setLoginData({...loginData, [e.target.name]: e.target.value});
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
   const validate = (e) => {
@@ -114,18 +115,28 @@ const LoginForm = (props) => {
   const login = e => {
     e.preventDefault();
 
-    axios
-      .post(`https://reqres.in/api/users`, loginData)
+    axiosWithAuth()
+      .post(`https://bw-silent-auction-pt.herokuapp.com/login`, loginData)
+
       .then(res => {
         console.log(res);
+        localStorage.setItem('token', 'efeijife-fefeife-fefe');
+        axiosWithAuth()
+          .post(`https://bw-silent-auction-pt.herokuapp.com/login`, loginData)
+        res.data.message.includes("seller") === true
+          ?
+          props.history.push('/SellerCard')
+          :
+          props.history.push('/BidderCard')
+
       })
       .catch(err => {
         console.log(err);
       });
-      setLoginData({
-        username: "",
-        password: "",
-      });
+    setLoginData({
+      username: "",
+      password: "",
+    });
   }
   const history = useHistory();
   const signUp = () => {
@@ -134,47 +145,47 @@ const LoginForm = (props) => {
 
   return (
     <Container>
-      <Img 
-      src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1505&q=80"
-      alt="Auction Gavel"/>
-    <Form>
-      <h1>Sign In</h1>
-      <form onSubmit={login}>
-        <label htmlFor="username">
-          <Input 
-          type="text" 
-          name="username" 
-          id="username" 
-          placeholder="Username"
-          onChange={inputChange} 
-          value={loginData.username}/>
-        </label>
-        {errorState.username.length > 0 ? (
-          <Error>{errorState.username}</Error>
-        ) : null}
-        <br/>
+      <Img
+        src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1505&q=80"
+        alt="Auction Gavel" />
+      <Form>
+        <h1>Sign In</h1>
+        <form onSubmit={login}>
+          <label htmlFor="username">
+            <Input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              onChange={inputChange}
+              value={loginData.username} />
+          </label>
+          {errorState.username.length > 0 ? (
+            <Error>{errorState.username}</Error>
+          ) : null}
+          <br />
 
-        <label htmlFor="password">
-          <Input 
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          onChange={inputChange}
-          value={loginData.password} />
-        </label>
-        {errorState.password.length > 0 ? (
-          <Error>{errorState.password}</Error>
-        ) : null}
-        <br/>
+          <label htmlFor="password">
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={inputChange}
+              value={loginData.password} />
+          </label>
+          {errorState.password.length > 0 ? (
+            <Error>{errorState.password}</Error>
+          ) : null}
+          <br />
 
-        <Button disabled={buttonDisabled} type="submit">Login</Button>
+          <Button disabled={buttonDisabled} type="submit">Login</Button>
 
-        <div>
-          <Button onClick={signUp} >Sign Up</Button>
-        </div>
-      </form>
-    </Form>
+          <div>
+            <Button onClick={signUp} >Sign Up</Button>
+          </div>
+        </form>
+      </Form>
     </Container>
   );
 }

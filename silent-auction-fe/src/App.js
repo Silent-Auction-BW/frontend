@@ -10,7 +10,8 @@ import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
 import { axiosWithAuth } from './axiosAuth';
 import UpdateForm from "./components/UpdateForm";
-import styled from'styled-components';
+import { PrivateRoute } from '../src/PrivateRoute';
+import styled from 'styled-components';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -93,8 +94,9 @@ function App() {
           </ul>
         </NavBar>
         <Switch>
-          <Route exact path="/BidderCard" component={BidderCard} />
-          <Route path="/SellerCard" component={SellerCard} />
+
+          <PrivateRoute exact path="/BidderCard" component={BidderCard} />
+          <PrivateRoute path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
           <Route
             path="/update-item/:id"
