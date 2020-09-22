@@ -10,6 +10,7 @@ import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
 import { axiosWithAuth } from './axiosAuth';
 import UpdateForm from "./components/UpdateForm";
+import { PrivateRoute } from '../src/PrivateRoute';
 function App() {
 
   const [itemData, SetItemData] = useState([
@@ -79,8 +80,9 @@ function App() {
           </NavLink>
         </ul>
         <Switch>
-          <Route exact path="/BidderCard" component={BidderCard} />
-          <Route path="/SellerCard" component={SellerCard} />
+
+          <PrivateRoute exact path="/BidderCard" component={BidderCard} />
+          <PrivateRoute path="/SellerCard" component={SellerCard} />
           <Route path="/item-form" component={ItemForm}></Route>
           <Route path="/update-item/:id"
             render={() => <UpdateForm item={itemData} setItem={SetItemData} />} />

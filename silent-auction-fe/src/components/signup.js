@@ -59,11 +59,10 @@ const SignupForm = (props) => {
   const [signupData, setSignupData] = useState({
     username: "",
     password: "",
-    name: "",
-    email: "",
     role: "",
+    email: "",
   });
-  
+
   const inputChange = e => {
     e.persist();
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
@@ -73,20 +72,19 @@ const SignupForm = (props) => {
     e.preventDefault();
 
     axios
-      .post(`https://reqres.in/api/users`, signupData)
+      .post(`https://bw-silent-auction-pt.herokuapp.com/register`, signupData)
       .then(res => {
-        console.log(res);
+        console.log('signup res', res);
       })
       .catch(err => {
         console.log(err);
       });
-      setSignupData({
-        username: "",
-        password: "",
-        name: "",
-        email: "",
-        role: ""
-      });
+    setSignupData({
+      username: "",
+      password: "",
+      role: "",
+      email: "",
+    });
   }
 
   const history = useHistory();
@@ -94,40 +92,43 @@ const SignupForm = (props) => {
     history.push("/login")
   };
 
+
+
   return (
     <Container>
+      {console.log('signupData', signupData)}
       <Img
-      src="https://images.unsplash.com/photo-1592500305630-419da01a7c33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-      alt="Bidders Sign"
+        src="https://images.unsplash.com/photo-1592500305630-419da01a7c33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        alt="Bidders Sign"
       />
-    <Form>
-      <h1>Sign Up</h1>
-      <form onSubmit={signup}>
-        <label htmlFor="username">
-          <Input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Username"
-            onChange={inputChange}
-            value={signupData.username}
-          />
-        </label>
-        <br />
+      <Form>
+        <h1>Sign Up</h1>
+        <form onSubmit={signup}>
+          <label htmlFor="username">
+            <Input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              onChange={inputChange}
+              value={signupData.username}
+            />
+          </label>
+          <br />
 
-        <label htmlFor="password">
-          <Input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            onChange={inputChange}
-            value={signupData.password}
-          />
-        </label>
-        <br />
+          <label htmlFor="password">
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={inputChange}
+              value={signupData.password}
+            />
+          </label>
+          <br />
 
-        <label htmlFor="name">
+          {/* <label htmlFor="name">
           <Input 
           type="text" 
           name="name" 
@@ -137,42 +138,42 @@ const SignupForm = (props) => {
           value={signupData.name}
           />
           
-        </label>
-        <br/>
+        </label> */}
+          <br />
 
-        <label htmlFor="email">
-          <Input 
-          type="text"
-          name="email"
-          id="email"
-          placeholder="Email"
-          onChange={inputChange}
-          value={signupData.email}
-          />
-        </label>
-        <br/>
+          <label htmlFor="email">
+            <Input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={inputChange}
+              value={signupData.email}
+            />
+          </label>
+          <br />
 
-        <label htmlFor="role">
-          <Select 
-          name="role" 
-          id="role"
-          onChange={inputChange}
-          value={signupData.role}
-          >
-            <option value="">Select an Option</option>
-            <option value="bidder">Bidder</option>
-            <option value="seller">Seller</option>
-          </Select>
-        </label>
-        <br/>
-        
-        <Button type="submit">Sign Up</Button>
+          <label htmlFor="role">
+            <Select
+              name="role"
+              id="role"
+              onChange={inputChange}
+              value={signupData.role}
+            >
+              <option value="">Select an Option</option>
+              <option value="bidder">Bidder</option>
+              <option value="seller">Seller</option>
+            </Select>
+          </label>
+          <br />
 
-        <div>
-          <Button onClick={loginReDirect}>Login</Button>
-        </div>
-      </form>
-    </Form>
+          <Button type="submit">Sign Up</Button>
+
+          <div>
+            <Button onClick={loginReDirect}>Login</Button>
+          </div>
+        </form>
+      </Form>
     </Container>
   );
 }
