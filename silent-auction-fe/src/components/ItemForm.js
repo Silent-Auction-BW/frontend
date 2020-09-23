@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 const initialItem = {
    // seller_id: '1',
-    name: "",
+   item_name: "",
     description: "",
     price: "",
     image_url: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
@@ -89,6 +89,7 @@ const ItemForm = () => {
         reader.onload = () => {
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
             if (reader.readyState === 2) {
+                console.log("image",reader.result)
                 SetItem({
                     ...item,
                     image_url: reader.result
@@ -99,6 +100,7 @@ const ItemForm = () => {
             }
         }
         reader.readAsDataURL(e.target.files[0])
+        console.log("image",reader.result)
         // SetItem({
         //     ...item,
         //     image_url: 'namd'
@@ -110,10 +112,10 @@ const ItemForm = () => {
 
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                    name="name"
+                    name="item_name"
                     onChange={changeHandler}
                     placeholder="name"
-                    value={item.name}
+                    value={item.item_name}
                 />
                 <input type="number"
                     name="price"
@@ -122,9 +124,9 @@ const ItemForm = () => {
                     value={item.price}
                 />
                
-               
+               <Uploadimg src={item.image_url} alt="" id="img"  />
                 <input type="file"
-                    name="imageurl"
+                    name="image_url"
                     accept="image/*"
                     id="input"
                     onChange={imageHandler} />

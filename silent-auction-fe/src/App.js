@@ -122,7 +122,7 @@ function App() {
                 </>
             }
 
-            <NavLink exact to="/item-form">
+            <NavLink exact to="/sellers/:id/item-form">
               Add Item
             </NavLink>
           </ul>

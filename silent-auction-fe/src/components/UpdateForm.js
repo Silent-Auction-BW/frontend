@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
+import { axiosWithAuth } from '../axiosAuth';
 
 const initialItem = {
     name: "",
@@ -27,10 +28,15 @@ const UpdateForm=(props)=>{
     const {id}=useParams();
 
     useEffect(()=>{
-        axios
-        .get(`${id}`)
+       
+    axiosWithAuth()
+    .get('https://bw-silent-auction-pt.herokuapp.com/items')
+    
         .then((res)=>{
-            setItem(res.data);
+            setItem(res.data[6]);
+            
+            console.log("image",res.data[6].image_url);
+            console.log("item image")
         })
         .catch((err)=>{
             console.log("Error in Useffect",err);
@@ -69,7 +75,7 @@ const UpdateForm=(props)=>{
             if(reader.readyState===2){
                 setItem({
                    ...item,
-                    imageUrl:reader.result
+                    image_url:reader.result
                     
                 })
                 console.log("item",item);
@@ -104,7 +110,7 @@ const UpdateForm=(props)=>{
                          />
                */} 
               
-                  <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+                  <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
                  
                <input type="file"
                     name="imageurl"
