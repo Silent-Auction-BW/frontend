@@ -5,6 +5,7 @@ import UploadImage from "./UploadImage";
 import DateTimeForm from "./DateTimeForm";
 import { axiosWithAuth } from '../axiosAuth';
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
 const initialItem = {
@@ -46,6 +47,8 @@ padding-top:30px;`
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
+    const {id}=useParams();
+    console.log("id",id);
 
 
     const changeHandler = ev => {
@@ -73,7 +76,7 @@ const ItemForm = () => {
         console.log("Items", item);
         //Waiting for axios link to posted
         //  axios.post("",item);
-     axios.post('https://bw-silent-auction-pt.herokuapp.com/sellers/1/items', item)
+     axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${id}/items`, item)
             .then(res => {
                 console.log(res)
             }
@@ -118,17 +121,8 @@ const ItemForm = () => {
                     placeholder="Price"
                     value={item.price}
                 />
-                {/*
-                <input type="text"
-                        name="imageUrl"
-                        onChange={changeHandler}
-                        placeholder="imageUrl"
-                        value={item.imageUrl}
-                         />
-               */}
-
-                <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
-
+               
+               
                 <input type="file"
                     name="imageurl"
                     accept="image/*"

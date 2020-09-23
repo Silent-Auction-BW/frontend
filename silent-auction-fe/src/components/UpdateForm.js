@@ -110,7 +110,8 @@ const UpdateForm=(props)=>{
                     name="imageurl"
                     accept="image/*"
                     id="input"
-                    onChange={imageHandler}/>
+                    onChange={imageHandler}
+                    value={item.imageUrl}/>
                      
               
              

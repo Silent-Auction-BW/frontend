@@ -68,11 +68,11 @@ const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
     const { push } = useHistory();
     //Finding id of the itemList
-    /*
-    const item=prop.itemData.find(
-        (itemId)=> (item.id)===prop.match.params.id
-    )
-*/
+    
+    // const item=prop.itemData.find(
+    //     (itemId)=> (item.id)===prop.match.params.id
+    // )
+
 
     const Prop = useContext(ItemContext);
 
@@ -92,11 +92,15 @@ const SellerCard = prop => {
     }
     const editItem = (e) => {
         push(`/update-item/${itemData.id}`);
+
+    }
+    const addItem=(e)=>{
+        push(`/sellers/1/item-form`);
     }
 
     return (
         <Page>
-            <AddItemButton>Add Item</AddItemButton>
+            <AddItemButton onClick={addItem}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) =>
                     <Container key={index}>
