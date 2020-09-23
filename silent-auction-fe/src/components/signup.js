@@ -152,10 +152,6 @@ const SignupForm = (props) => {
 
   return (
     <Container>
-      <Img
-        src="https://images.unsplash.com/photo-1592500305630-419da01a7c33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-        alt="Bidders Sign"
-      />
       <Form>
         <h1>Sign Up</h1>
         <form onSubmit={signup}>
@@ -171,7 +167,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.username.length > 0 ? (
             <Error>{errorState.username}</Error>
-          ) : null}
+            ) : null}
           <br />
 
           <label htmlFor="password">
@@ -186,7 +182,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.password.length > 0 ? (
             <Error>{errorState.password}</Error>
-          ) : null}
+            ) : null}
           <br />
 
           {/* <label htmlFor="name">
@@ -199,7 +195,7 @@ const SignupForm = (props) => {
           value={signupData.name}
           />
           
-        </label>
+          </label>
         <br/> */}
 
           <label htmlFor="email">
@@ -214,7 +210,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.email.length > 0 ? (
             <Error>{errorState.email}</Error>
-          ) : null}
+            ) : null}
           <br />
 
           <label htmlFor="role">
@@ -241,6 +237,10 @@ const SignupForm = (props) => {
           </div>
         </form>
       </Form>
+      <Img
+        src="https://images.unsplash.com/photo-1592500305630-419da01a7c33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        alt="Bidders Sign"
+      />
     </Container>
   );
 };
