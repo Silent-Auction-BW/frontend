@@ -30,6 +30,8 @@ const Input = styled.input`
   background-color: #f4f9e9;
   border: 1px solid #28afb0;
   border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
 `;
 
 const Button = styled.button`
@@ -54,6 +56,7 @@ const Img = styled.img`
 const Error = styled.p`
   color: orange;
   margin: 0;
+  font-size: 0.8rem;
 `
 
 const formSchema = yup.object().shape({
