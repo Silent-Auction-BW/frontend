@@ -100,14 +100,15 @@ const SellerCard = prop => {
             {
                 itemData.map((item, index) =>
                     <Container key={index}>
-                        <ImageContainer src={item.img} alt='item-imag' />
+                        <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
 
                             <Price>
-                                {item.price.bidState == true ? <><div>Current Bid: ${item.price.price}</div><div>Bidder: {item.biderName}</div></> : <div>${item.price.price}</div>}
+                                {item.bidState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
-                                <div>{item.item_description}</div>
+                                <div>{item.item_name}</div>
+                                <div>{item.description}</div>
                             </Des>
 
                             <div>

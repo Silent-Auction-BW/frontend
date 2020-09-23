@@ -70,9 +70,9 @@ const ItemForm = () => {
         console.log("Items", item);
         //Waiting for axios link to posted
         //  axios.post("",item);
-        axiosWithAuth().post('https://bw-silent-auction-pt.herokuapp.com/sellers/4/items', item)
+        axiosWithAuth().post('https://bw-silent-auction-pt.herokuapp.com/sellers/1/items', item)
             .then(res => {
-                console.log(res)
+                console.log('upload res', res)
             }
             ).catch(err => console.log('err', err))
         // console.log("Item got posted", item);
@@ -83,6 +83,7 @@ const ItemForm = () => {
         reader.onload = () => {
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
             if (reader.readyState === 2) {
+                console.log("reader.result", reader.result)
                 SetItem({
                     ...item,
                     image_url: reader.result

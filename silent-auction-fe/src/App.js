@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import './App.css';
 import ItemForm from "./components/ItemForm";
 import LoginForm from './components/login';
@@ -40,54 +40,68 @@ function App() {
     },
     {
       seller_id: 'William',
+
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      seller_id: 'William',
-      item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      seller_id: 'William',
-      item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      price: { bidState: false, price: 100 },
+      image_url: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
+      bidState: false,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     },
     {
       seller_id: 'William',
+
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      image_url: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
+      bidState: false,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     },
     {
       seller_id: 'William',
+
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      image_url: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      bidState: true,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: '15:00 min'
+    },
+    {
+      seller_id: 'William',
+      price: 100,
+      item_name: 'Apple',
+      image_url: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      bidState: true,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: '15:00 min'
+    },
+    {
+      seller_id: 'William',
+      price: 100,
+      item_name: 'Apple',
+      image_url: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
+      bidState: false,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     }
   ])
 
-  // useEffect(() => {
-  //   axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
-  //     .then(res => {
-  //       SetItemData(res);
-  //       console.log('get item scc,', res)
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [])
+  const [testingData, setTestingData] = useState(
+    []
+  )
+
+  useEffect(() => {
+    axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
+      .then(res => {
+        setTestingData(res.data);
+        console.log('get item scc,', res.data)
+      })
+      .catch(err => console.log(err));
+  }, [])
+
+
 
   const [loginState, setLoginState] = useState(false);
 
@@ -128,6 +142,10 @@ function App() {
             </NavLink>
           </ul>
         </NavBar>
+        {testingData.map(data =>
+          <img src={data.img}></img>
+        )}
+
         <Switch>
 
 
