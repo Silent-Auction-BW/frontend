@@ -6,6 +6,7 @@ import DateTimeForm from "./DateTimeForm";
 
 
 const initialItem = {
+    seller_id:Date.now(),
     name: "",
     price: "",
     imageUrl: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
@@ -13,14 +14,16 @@ const initialItem = {
     auctionTime: ""
 };
 const Uploadimg = styled.img`
-width:200px;
-height: 200px;`
+width:400px;
+height: 400px;
+display: flex;
+flex-direction: column;`
 
 const Form = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
-max-width: 300px;
+max-width: 800px;
 margin: 0 auto;
 padding-top:30px;`
 
