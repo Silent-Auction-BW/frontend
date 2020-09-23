@@ -79,14 +79,14 @@ function App() {
     }
   ])
 
-  // useEffect(() => {
-  //   axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
-  //     .then(res => {
-  //       SetItemData(res);
-  //       console.log('get item scc,', res)
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [])
+  useEffect(() => {
+    axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
+      .then(res => {
+        SetItemData(res);
+        console.log('get item scc,', res)
+      })
+      .catch(err => console.log(err));
+  }, [])
 
   const [loginState, setLoginState] = useState(false);
 
