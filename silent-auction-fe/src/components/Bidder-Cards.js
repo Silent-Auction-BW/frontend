@@ -36,7 +36,7 @@ div{
 }
 
 `
-const Timer = styled.div`
+const TimerStyle = styled.div`
 border: 2px green solid;
 border-radius: 100%;
 `
@@ -82,7 +82,7 @@ const BidderCard = prop => {
                             </Des>
 
                             <div>
-                                <Timer>{item.timer}</Timer>
+                                <TimerStyle>{item.timer}</TimerStyle>
                                 {/* <PlaceBid item={item}/> */}
                             </div>
                         </DataContainer>

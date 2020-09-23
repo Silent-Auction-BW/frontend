@@ -5,6 +5,7 @@ import { ItemContext } from '../contexts/ItemContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import DateTimeForm from "../components/DateTimeForm";
+import Timer from 'react-compound-timer';
 
 const Container = styled.div`
 border: 1px #80808059 solid;
@@ -39,11 +40,11 @@ div{
 }
 
 `
-const Timer = styled.div`
-border: 2px green solid;
+const TimerStyle = styled.div`
+border: 2px 0px green solid;
 border-radius: 100%;
 `
-const Price = styled.div`
+const Price = styled.div` 
 display: flex;
 font-weight: 600;
 `
@@ -94,12 +95,22 @@ const SellerCard = prop => {
         push(`/update-item/${itemData.id}`);
     }
 
+
     return (
         <Page>
-            <AddItemButton>Add Item</AddItemButton>
+            <AddItemButton onClick={() => push("/item-form")}>Add Item</AddItemButton>
             {
-                itemData.map((item, index) =>
-                    <Container key={index}>
+                itemData.map((item, index) => {
+
+                    const passedTime = Date.now() - item.timer;
+
+                    const remainedTime = item.timer_length - passedTime;
+                    console.log('remainedTime', remainedTime);
+                    return <Container key={index}>
+                        {/* {console.log('time', item.timer_length - (Date.now - item.timer))} */}
+
+
+
                         <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
 
@@ -112,17 +123,32 @@ const SellerCard = prop => {
                             </Des>
 
                             <div>
-                                <Timer>{item.timer}</Timer>
-                                {/* <PlaceBid item={item} /> */}
+                                <TimerStyle>
+                                    {/* <PlaceBid item={item} /> */}
 
-                                {/* <DateTimeForm /> */}
-
-
+                                    {/* <DateTimeForm /> */}
+                                    <Timer
+                                        initialTime={remainedTime}
+                                        direction="backward"
+                                    >
+                                        {
+                                            () => (
+                                                <>
+                                                    <Timer.Days /> days
+                                                <Timer.Hours /> hours
+                                                <Timer.Minutes /> minutes
+                                                <Timer.Seconds /> seconds
+                                            </>
+                                            )
+                                        }
+                                    </Timer>
+                                </TimerStyle>
                                 <button onClick={editItem}>Edit</button>
                                 <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>
+                }
                 )
             }
         </Page>
