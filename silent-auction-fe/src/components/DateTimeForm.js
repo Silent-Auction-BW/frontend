@@ -25,7 +25,7 @@ class DateTimeForm extends Component {
     e.preventDefault();
     this.props.setItem({
       ...this.props.item,
-      auctionTime: this.state.startDate
+      timer: this.state.startDate
     });
     console.log("setItem", this.props.item)
     console.log(this.state.startDate)

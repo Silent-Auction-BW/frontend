@@ -10,87 +10,140 @@ import SellerCard from './components/Seller-Cards';
 import { ItemContext } from './contexts/ItemContext';
 import { axiosWithAuth } from './axiosAuth';
 import UpdateForm from "./components/UpdateForm";
+import { PrivateRoute } from '../src/PrivateRoute';
+import styled from 'styled-components';
+
+const NavBar = styled.header`
+  box-shadow: 0 5px 10px black;
+  display: flex;
+  justify-content: center;
+  background-color: #19647e;
+  margin: 0;
+  padding-bottom: 10px;
+  height: 50px;
+`;
 
 function App() {
 
   const [itemData, SetItemData] = useState([
     {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      price: { bidState: true, price: 100 },
-      biderName: 'Tim',
+
+      item_name: 'Apple',
+      price: 100,
+      bidState: true,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      image_url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+      timer: '15:00 min',
+      item_id: 0,
+      seller_id: 1
+    },
+    {
+      seller_id: 'William',
+      item_name: 'Apple',
+      img: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
+      price: { bidState: false, price: 100 },
+      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     },
     {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
+      seller_id: 'William',
+      item_name: 'Apple',
+      img: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
+      price: { bidState: false, price: 100 },
+      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: '15:00 min'
+    },
+    {
+      seller_id: 'William',
+      item_name: 'Apple',
+      img: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
       price: { bidState: false, price: 100 },
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     },
     {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
+      seller_id: 'William',
+      item_name: 'Apple',
+      img: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
       price: { bidState: false, price: 100 },
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     },
     {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      seller_id: 'William',
+      item_name: 'Apple',
+      img: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
       price: { bidState: false, price: 100 },
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      price: { bidState: false, price: 100 },
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      name: 'William',
-      image: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
-      price: { bidState: false, price: 100 },
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: '15:00 min'
     }
   ])
 
-  useEffect(() => {
-    axiosWithAuth().post('/items/:id')
-      .then(res => {
-        SetItemData(res);
-      })
-      .catch(err => console.log(err));
-  }, [])
+  // useEffect(() => {
+  //   axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
+  //     .then(res => {
+  //       SetItemData(res);
+  //       console.log('get item scc,', res)
+  //     })
+  //     .catch(err => console.log(err));
+  // }, [])
+
+  const [loginState, setLoginState] = useState(false);
+
+  const loginStateSetter = (state) => {
+    setLoginState(state)
+  }
+
+  const handleLogout = () => {
+    localStorage.setItem('token', '');
+    setLoginState(false);
+  }
 
   return (
-    <ItemContext.Provider value={itemData}>
-      <div className="App">
-        <ul className="navbar">
-          <Link to="/BidderCard">Bidder Dashborad</Link>
-          <Link to="/SellerCard">Seller Dashborad</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-          <NavLink exact to="/item-form">
-            Add Item
-          </NavLink>
-        </ul>
-        <Switch>
-          <Route exact path="/BidderCard" component={BidderCard} />
-          <Route path="/SellerCard" component={SellerCard} />
-          <Route path="/item-form" component={ItemForm}></Route>
-          <Route path="/update-item/:id"
-            render={() => <UpdateForm item={itemData} setItem={SetItemData} />} />
 
-          <Route path="/login" component={LoginForm}></Route>
-          <Route path="/signup" component={SignupForm}></Route>
+    <ItemContext.Provider value={
+      { itemData: itemData, loginStateSetter: loginStateSetter }
+    }>
+      <div className="App">
+        <NavBar>
+          <ul className="navbar">
+            {
+              loginState == false
+                ?
+                <>
+                  <Link to="/login">Login</Link>
+                  <Link to="/signup">Signup</Link>
+                </>
+                :
+                <>
+                  <Link to="/BidderCard">Bidder Dashboard</Link>
+                  <Link to="/SellerCard">Seller Dashboard</Link>
+                  <Link onClick={handleLogout}>Logout</Link>
+                </>
+            }
+
+            <NavLink exact to="/item-form">
+              Add Item
+            </NavLink>
+          </ul>
+        </NavBar>
+        <Switch>
+
+
+          <Route path="/login" component={LoginForm} loginStateSetter={loginStateSetter}></Route>
+          <Route path="/signup" component={SignupForm} loginStateSetter={loginStateSetter}></Route>
+          <PrivateRoute path="/BidderCard" component={BidderCard} />
+          <PrivateRoute path="/SellerCard" component={SellerCard} />
+          <Route path="/item-form" component={ItemForm}></Route>
+          <Route
+            path="/update-item/:id"
+            render={() => <UpdateForm item={itemData} setItem={SetItemData} />}
+          />
+
+
         </Switch>
       </div>
-    </ItemContext.Provider >
+    </ItemContext.Provider>
   );
 }
 
