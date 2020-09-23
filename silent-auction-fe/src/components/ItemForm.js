@@ -3,15 +3,31 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import UploadImage from "./UploadImage";
 import DateTimeForm from "./DateTimeForm";
+import { axiosWithAuth } from '../axiosAuth';
 
 
 const initialItem = {
+    seller_id: '1',
     name: "",
-    price: "",
-    imageUrl: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
     description: "",
-    auctionTime: ""
+    price: "",
+    image_url: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
+    timer: ""
 };
+
+// const initialItem =  {
+
+//     item_name: 'Apple',
+//     price: { bidState: true, price: 100 },
+//     item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+//     img: 'https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg',
+//     timer: '15:00 min',
+//     item_id: 0,
+//     seller_id: 'William',
+//     biderName: 'Tim'
+//   }
+
+
 const Uploadimg = styled.img`
 width:200px;
 height: 200px;`
@@ -54,24 +70,33 @@ const ItemForm = () => {
         console.log("Items", item);
         //Waiting for axios link to posted
         //  axios.post("",item);
-        console.log("Item got posted", item);
+        axiosWithAuth().post('https://bw-silent-auction-pt.herokuapp.com/items', item)
+            .then(res => {
+                console.log(res)
+            }
+            ).catch(err => console.log('err', err))
+        // console.log("Item got posted", item);
 
     }
     const imageHandler = e => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
-            if (reader.readyState === 2) {
-                SetItem({
-                    ...item,
-                    imageUrl: reader.result
+        // const reader = new FileReader();
+        // reader.onload = () => {
+        //     // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
+        //     if (reader.readyState === 2) {
+        //         SetItem({
+        //             ...item,
+        //             image_url: reader.result
 
-                })
-                console.log("item", item);
+        //         })
+        //         console.log("item", item);
 
-            }
-        }
-        reader.readAsDataURL(e.target.files[0])
+        //     }
+        // }
+        // reader.readAsDataURL(e.target.files[0])
+        SetItem({
+            ...item,
+            image_url: 'https://ibb.co/Zfjv48p'
+        })
     }
 
     return (
@@ -99,7 +124,7 @@ const ItemForm = () => {
                          />
                */}
 
-                <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+                <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
 
                 <input type="file"
                     name="imageurl"

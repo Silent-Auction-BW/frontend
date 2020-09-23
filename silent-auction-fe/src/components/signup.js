@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { axiosWithAuth } from '../axiosAuth';
 import * as yup from "yup";
+import { ItemContext } from '../contexts/ItemContext';
+
 
 const Container = styled.div`
   box-shadow: 5px 5px 10px black;
@@ -79,7 +82,14 @@ const formSchema = yup.object().shape({
     .required("Must include your email."),
 });
 
+
+
 const SignupForm = (props) => {
+
+
+
+
+
   const [signupData, setSignupData] = useState({
     username: "",
     password: "",
@@ -125,7 +135,7 @@ const SignupForm = (props) => {
     validate(e);
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   };
-
+  const Prop = useContext(ItemContext);
   const signup = (e) => {
     e.preventDefault();
 
@@ -133,6 +143,30 @@ const SignupForm = (props) => {
       .post(`https://bw-silent-auction-pt.herokuapp.com/register`, signupData)
       .then((res) => {
         console.log("signup res", res);
+
+        axiosWithAuth()
+          .post(`https://bw-silent-auction-pt.herokuapp.com/login`, {
+            username: signupData.username,
+            password: signupData.password
+          })
+
+          .then(res => {
+            console.log(res);
+            localStorage.setItem('token', 'efeijife-fefeife-fefe');
+            Prop.loginStateSetter(true);
+
+            res.data.message.includes("seller") === true
+              ?
+              props.history.push('/SellerCard')
+              :
+              props.history.push('/BidderCard')
+
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+
       })
       .catch((err) => {
         console.log(err);

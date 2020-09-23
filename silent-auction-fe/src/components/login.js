@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { axiosWithAuth } from '../axiosAuth';
 import * as yup from 'yup';
+import { ItemContext } from '../contexts/ItemContext';
+
 
 const Container = styled.div`
   box-shadow: 5px 5px 10px black;
@@ -115,6 +117,8 @@ const LoginForm = (props) => {
       });
   };
 
+  const Prop = useContext(ItemContext);
+
   const login = e => {
     e.preventDefault();
 
@@ -124,8 +128,8 @@ const LoginForm = (props) => {
       .then(res => {
         console.log(res);
         localStorage.setItem('token', 'efeijife-fefeife-fefe');
-        axiosWithAuth()
-          .post(`https://bw-silent-auction-pt.herokuapp.com/login`, loginData)
+        Prop.loginStateSetter(true);
+        console.log('props', props)
         res.data.message.includes("seller") === true
           ?
           props.history.push('/SellerCard')
