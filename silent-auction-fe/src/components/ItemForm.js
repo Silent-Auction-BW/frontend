@@ -70,7 +70,7 @@ const ItemForm = () => {
         console.log("Items", item);
         //Waiting for axios link to posted
         //  axios.post("",item);
-        axiosWithAuth().post('https://bw-silent-auction-pt.herokuapp.com/items', item)
+        axiosWithAuth().post('https://bw-silent-auction-pt.herokuapp.com/sellers/4/items', item)
             .then(res => {
                 console.log(res)
             }
@@ -79,24 +79,21 @@ const ItemForm = () => {
 
     }
     const imageHandler = e => {
-        // const reader = new FileReader();
-        // reader.onload = () => {
-        //     // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
-        //     if (reader.readyState === 2) {
-        //         SetItem({
-        //             ...item,
-        //             image_url: reader.result
+        const reader = new FileReader();
+        reader.onload = () => {
+            // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
+            if (reader.readyState === 2) {
+                SetItem({
+                    ...item,
+                    image_url: reader.result
 
-        //         })
-        //         console.log("item", item);
+                })
+                console.log("item", item);
 
-        //     }
-        // }
-        // reader.readAsDataURL(e.target.files[0])
-        SetItem({
-            ...item,
-            image_url: 'https://ibb.co/Zfjv48p'
-        })
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+
     }
 
     return (

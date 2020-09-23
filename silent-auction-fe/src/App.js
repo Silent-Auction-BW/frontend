@@ -35,7 +35,8 @@ function App() {
       image_url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
       timer: '15:00 min',
       item_id: 0,
-      seller_id: 1
+      seller_id: 1,
+      timer_length: '3 min'
     },
     {
       seller_id: 'William',
