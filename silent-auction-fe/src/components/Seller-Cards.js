@@ -2,10 +2,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import DateTimeForm from "../components/DateTimeForm";
-import Timer from 'react-compound-timer';
+import Timer from "react-compound-timer";
 
 const Container = styled.div`
 border: 1px #80808059 solid;
@@ -72,7 +72,7 @@ const SellerCard = prop => {
     // const item=prop.itemData.find(
     //     (itemId)=> (item.id)===prop.match.params.id
     // )
-    const id = 1;
+    const id = useParams();
 
     const Prop = useContext(ItemContext);
 
@@ -82,16 +82,16 @@ const SellerCard = prop => {
     const deleteItem = (e) => {
         e.preventDefault();
         axios
-            .delete(``)
+            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
             .then((res) => {
                 prop.setUserData(res.data);
-                /* */
+                push(`/SellerCard`);
             })
             .catch((err) =>
                 console.log("delete error", err));
     }
     const editItem = (e) => {
-        push(`/update-item/${itemData.id}`);
+        push(`/update-item/${id}`);
 
     }
     const addItem = (e) => {

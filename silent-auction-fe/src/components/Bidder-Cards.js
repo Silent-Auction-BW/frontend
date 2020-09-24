@@ -99,8 +99,6 @@ const BidderCard = prop => {
                                 {/* <PlaceBid item={item}/> */}
                                 <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>}
-                           
-                               
                             </div>
                         </DataContainer>
                     </Container>

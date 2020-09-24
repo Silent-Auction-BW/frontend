@@ -26,16 +26,17 @@ const UpdateForm=(props)=>{
     const {push}=useHistory();
     const [item,setItem]=useState(initialItem);
     const {id}=useParams();
+    console.log("id",id);
 
     useEffect(()=>{
        
     axiosWithAuth()
-    .get(`https://bw-silent-auction-pt.herokuapp.com/items/1`)
+    .get(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
     
         .then((res)=>{
-            setItem(res.data);
+            setItem(res.data[0]);
             
-            console.log("image",res.data);
+            console.log("image",res.data[0]);
             console.log("item image")
         })
         .catch((err)=>{
