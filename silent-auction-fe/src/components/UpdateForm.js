@@ -30,12 +30,12 @@ const UpdateForm=(props)=>{
     useEffect(()=>{
        
     axiosWithAuth()
-    .get(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
+    .get(`https://bw-silent-auction-pt.herokuapp.com/items/1`)
     
         .then((res)=>{
             setItem(res.data);
             
-            console.log("image",res.data.image_url);
+            console.log("image",res.data);
             console.log("item image")
         })
         .catch((err)=>{
