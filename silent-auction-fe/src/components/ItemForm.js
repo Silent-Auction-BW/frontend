@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import styled from "styled-components";
 import UploadImage from "./UploadImage";
@@ -6,6 +6,8 @@ import DateTimeForm from "./DateTimeForm";
 import { axiosWithAuth } from '../axiosAuth';
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { ItemContext } from '../contexts/ItemContext';
+
 
 
 const initialItem = {
@@ -64,8 +66,11 @@ const Input = styled.input`
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
-    const { id } = useParams();
-    console.log("id", id);
+    // const { id } = useParams();
+    // console.log("id", id);
+
+
+    const Prop = useContext(ItemContext);
 
 
     const changeHandler = ev => {
@@ -88,17 +93,20 @@ const ItemForm = () => {
 
 
     };
+
+    useEffect(() => Prop.addingItemSetter(true))
     const handleSubmit = e => {
         e.preventDefault();
-        console.log("Items", item);
-        //Waiting for axios link to posted
-        //  axios.post("",item);
-        axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${id}/items`, item)
+        // console.log('seller id on itemForm:', Prop.loginData.seller_id)
+        // console.log("Items", item);
+
+        axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${Prop.loginData.seller_id}/items`, item)
             .then(res => {
-                console.log('upload res', res)
+                console.log('uploaded res', res)
+                Prop.addingItemSetter(false)
             }
             ).catch(err => console.log('err', err))
-        // console.log("Item got posted", item);
+
 
     }
     const imageHandler = e => {
@@ -130,10 +138,10 @@ const ItemForm = () => {
             <form onSubmit={handleSubmit}>
                 <Input
                     type="text"
-                    name="name"
+                    name="item_name"
                     onChange={changeHandler}
                     placeholder="Name"
-                    value={item.name}
+                    value={item.item_name}
                 />
                 <Input
                     type="number"
