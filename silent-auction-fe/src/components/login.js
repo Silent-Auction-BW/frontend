@@ -73,6 +73,19 @@ const formSchema = yup.object().shape({
 });
 
 const LoginForm = (props) => {
+
+  // // this useEffect is a helpper so we don't have to login. You can delete it.
+  // useEffect(() => {
+  //   localStorage.setItem('token', 'efeijife-fefeife-fefe');
+  //   history.push('/SellerCard');
+  //   Prop.loginStateSetter(true);
+  // }, [])
+
+  // // this useEffect is a helpper so we don't have to login. You can delete it.
+
+
+
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -120,17 +133,20 @@ const LoginForm = (props) => {
   const Prop = useContext(ItemContext);
 
   const login = e => {
+
+
+
     e.preventDefault();
 
     axiosWithAuth()
       .post(`https://bw-silent-auction-pt.herokuapp.com/login`, loginData)
 
       .then(res => {
-        console.log(res);
+        console.log('seccuss login', res);
         localStorage.setItem('token', 'efeijife-fefeife-fefe');
         Prop.loginStateSetter(true);
         console.log('props', props)
-        res.data.message.includes("seller") === true
+        res.data.seller_id
           ?
           props.history.push('/SellerCard')
           :

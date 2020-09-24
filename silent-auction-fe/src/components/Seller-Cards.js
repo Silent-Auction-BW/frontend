@@ -5,15 +5,15 @@ import { ItemContext } from '../contexts/ItemContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import DateTimeForm from "../components/DateTimeForm";
+import Timer from 'react-compound-timer';
 
 const Container = styled.div`
 border: 1px #80808059 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
-margin: 1rem 0;
+margin: 1rem 0;`
 
-`
 const Page = styled.div`
 border: 2px #80808059 solid;
 align-items: baseline;
@@ -39,11 +39,11 @@ div{
 }
 
 `
-const Timer = styled.div`
-border: 2px green solid;
+const TimerStyle = styled.div`
+border: 2px 0px green solid;
 border-radius: 100%;
 `
-const Price = styled.div`
+const Price = styled.div` 
 display: flex;
 font-weight: 600;
 `
@@ -68,11 +68,11 @@ const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
     const { push } = useHistory();
     //Finding id of the itemList
-    /*
-    const item=prop.itemData.find(
-        (itemId)=> (item.id)===prop.match.params.id
-    )
-*/
+
+    // const item=prop.itemData.find(
+    //     (itemId)=> (item.id)===prop.match.params.id
+    // )
+    const id = 1;
 
     const Prop = useContext(ItemContext);
 
@@ -92,36 +92,66 @@ const SellerCard = prop => {
     }
     const editItem = (e) => {
         push(`/update-item/${itemData.id}`);
+
     }
+    const addItem = (e) => {
+        push(`/sellers/${id}/item-form`);
+    }
+
 
     return (
         <Page>
-            <AddItemButton>Add Item</AddItemButton>
+            <AddItemButton onClick={() => push("/item-form")}>Add Item</AddItemButton>
             {
-                itemData.map((item, index) =>
-                    <Container key={index}>
-                        <ImageContainer src={item.img} alt='item-imag' />
+                itemData.map((item, index) => {
+
+                    const passedTime = Date.now() - item.timer;
+
+                    const remainedTime = item.timer_length - passedTime;
+                    console.log('remainedTime', remainedTime);
+                    return <Container key={index}>
+                        {/* {console.log('time', item.timer_length - (Date.now - item.timer))} */}
+
+
+
+                        <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
 
                             <Price>
-                                {item.price.bidState == true ? <><div>Current Bid: ${item.price.price}</div><div>Bidder: {item.biderName}</div></> : <div>${item.price.price}</div>}
+                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
-                                <div>{item.item_description}</div>
+                                <div>{item.item_name}</div>
+                                <div>{item.description}</div>
                             </Des>
 
                             <div>
-                                <Timer>{item.timer}</Timer>
-                                {/* <PlaceBid item={item} /> */}
+                                <TimerStyle>
+                                    {/* <PlaceBid item={item} /> */}
 
-                                {/* <DateTimeForm /> */}
-
-
+                                    {/* <DateTimeForm /> */}
+                                    <Timer
+                                        initialTime={remainedTime}
+                                        direction="backward"
+                                    >
+                                        {
+                                            () => (
+                                                <>
+                                                    <Timer.Days /> days
+                                                <Timer.Hours /> hours
+                                                <Timer.Minutes /> minutes
+                                                <Timer.Seconds /> seconds
+                                            </>
+                                            )
+                                        }
+                                    </Timer>
+                                </TimerStyle>
                                 <button onClick={editItem}>Edit</button>
                                 <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>
+                }
                 )
             }
         </Page>

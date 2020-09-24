@@ -36,7 +36,7 @@ div{
 }
 
 `
-const Timer = styled.div`
+const TimerStyle = styled.div`
 border: 2px green solid;
 border-radius: 100%;
 `
@@ -56,7 +56,7 @@ text-align: left;
 
 const BidderCard = prop => {
     const [itemData, setUserData] = useState([])
-
+    const [show, toggleShow] = useState(true);
 
     const Prop = useContext(ItemContext);
 
@@ -64,6 +64,19 @@ const BidderCard = prop => {
 
         setUserData(Prop.itemData)
     }, [])
+
+    const bidHandler = (e) => {
+
+    }
+    const handleOnChange=(e)=>{
+       if(
+        e.target.value>=itemData.price
+       ) {
+        console.log("itemhandle",itemData.price);
+       }
+        
+      //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
+    }
 
     return (
         <Page>
@@ -73,25 +86,27 @@ const BidderCard = prop => {
                     <Container key={index}>
                         <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
-                            <Seller>
-                                <div>Seller: {item.seller_id}</div>
-                            </Seller>
+
                             <Price>
-                                {item.bidState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price.price}</div>}
+                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
                                 <div>{item.description}</div>
                             </Des>
 
                             <div>
-                                <Timer>{item.timer}</Timer>
+                                <TimerStyle>{item.timer}</TimerStyle>
                                 {/* <PlaceBid item={item}/> */}
+                                <input key={index} type="number" onChange={handleOnChange} ></input>
+                                {show && <button>Hi there</button>}
+                           
+                               
                             </div>
                         </DataContainer>
                     </Container>
-                )
-            }
-        </Page>
+    )
+}
+        </Page >
     )
 
 

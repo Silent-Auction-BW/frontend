@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import './App.css';
 import ItemForm from "./components/ItemForm";
 import LoginForm from './components/login';
@@ -27,66 +27,78 @@ function App() {
 
   const [itemData, SetItemData] = useState([
     {
-
-      item_name: 'Apple',
+      item_name: 'Appdddle',
       price: 100,
-      bidState: true,
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      itemState: true,
+      description: 'WilliamMarkup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       image_url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-      timer: '15:00 min',
+      timer: 1600723599125,
       item_id: 0,
-      seller_id: 1
+      seller_id: 1,
+      timer_length: 540000000
     },
     {
       seller_id: 'William',
+
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      seller_id: 'William',
-      item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
-    },
-    {
-      seller_id: 'William',
-      item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      price: { bidState: false, price: 100 },
+      image_url: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
+      itemState: false,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
+      timer: 1600723599125,
+      timer_length: 720000000
     },
     {
       seller_id: 'William',
+
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
+      image_url: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
+      itemState: false,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: 1600723599125,
+      timer_length: 1080000000
     },
     {
       seller_id: 'William',
+      price: 100,
       item_name: 'Apple',
-      img: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
-      price: { bidState: false, price: 100 },
-      item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-      timer: '15:00 min'
+      image_url: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      itemState: true,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: 1600723599125,
+      timer_length: 1800000000
+    },
+    {
+      seller_id: 'William',
+      price: 100,
+      item_name: 'Apple',
+      image_url: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      itemState: true,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: 1600723599125,
+      timer_length: 2160000000
+    },
+    {
+      seller_id: 'William',
+      price: 100,
+      item_name: 'Apple',
+      image_url: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
+      itemState: false,
+      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      timer: 1600723599125,
+      timer_length: 180000000
     }
   ])
 
-  // useEffect(() => {
-  //   axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
-  //     .then(res => {
-  //       SetItemData(res);
-  //       console.log('get item scc,', res)
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [])
+  useEffect(() => {
+    axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
+      .then(res => {
+        SetItemData(res.data);
+        console.log('get item scc,', res)
+      })
+      .catch(err => console.log(err));
+  }, [])
 
   const [loginState, setLoginState] = useState(false);
 
@@ -122,11 +134,12 @@ function App() {
                 </>
             }
 
-            <NavLink exact to="/item-form">
+            <NavLink exact to="/sellers/:id/item-form">
               Add Item
             </NavLink>
           </ul>
         </NavBar>
+
         <Switch>
 
 
@@ -134,7 +147,7 @@ function App() {
           <Route path="/signup" component={SignupForm} loginStateSetter={loginStateSetter}></Route>
           <PrivateRoute path="/BidderCard" component={BidderCard} />
           <PrivateRoute path="/SellerCard" component={SellerCard} />
-          <Route path="/item-form" component={ItemForm}></Route>
+          <Route path="/sellers/:id/item-form" component={ItemForm}></Route>
           <Route
             path="/update-item/:id"
             render={() => <UpdateForm item={itemData} setItem={SetItemData} />}
@@ -142,6 +155,7 @@ function App() {
 
 
         </Switch>
+
       </div>
     </ItemContext.Provider>
   );
