@@ -90,14 +90,19 @@ const BidderCard = prop => {
       }
     }
     const bidchange=(e,id)=>{
-        //Mashima's
+       
         let newArray = itemData.map(el => {
             if(el.item_id == id){
-                el.bidPrice = e.target.value
+                var pr=Number(el.price);
+                console.log(pr);
+                if(e.target.value>pr){
+                    el.bidPrice = e.target.value;
+                }
+                
             }
             return el
         })
-        setUserData(newArray)
+        setUserData(newArray);
         console.log(itemData)
 
 
@@ -138,7 +143,7 @@ const BidderCard = prop => {
                                  <input type="number" id= {index} name="Bidprice" onChange={e=>bidchange(e, item.item_id)} key={index}  /> 
                                  {
 
-                                    item.bidPrice>0 ? <button id={index} onclick >edit</button>:null
+                                    item.bidPrice>0 ? <button id={index} >edit</button>:null
 
                                  }
                                 
