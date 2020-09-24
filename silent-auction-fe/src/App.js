@@ -27,11 +27,10 @@ function App() {
 
   const [itemData, SetItemData] = useState([
     {
-
-      item_name: 'Apple',
+      item_name: 'Appdddle',
       price: 100,
-      bidState: true,
-      description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
+      itemState: true,
+      description: 'WilliamMarkup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       image_url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
       timer: 1600723599125,
       item_id: 0,
@@ -44,7 +43,7 @@ function App() {
       price: 100,
       item_name: 'Apple',
       image_url: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80',
-      bidState: false,
+      itemState: false,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: 1600723599125,
       timer_length: 720000000
@@ -55,18 +54,17 @@ function App() {
       price: 100,
       item_name: 'Apple',
       image_url: 'https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
-      bidState: false,
+      itemState: false,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: 1600723599125,
       timer_length: 1080000000
     },
     {
       seller_id: 'William',
-
       price: 100,
       item_name: 'Apple',
       image_url: 'https://images.unsplash.com/photo-1519687774292-8ef26b975fc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      bidState: true,
+      itemState: true,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: 1600723599125,
       timer_length: 1800000000
@@ -76,7 +74,7 @@ function App() {
       price: 100,
       item_name: 'Apple',
       image_url: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      bidState: true,
+      itemState: true,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: 1600723599125,
       timer_length: 2160000000
@@ -86,7 +84,7 @@ function App() {
       price: 100,
       item_name: 'Apple',
       image_url: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE3MzYxfQ&auto=format&fit=crop&w=1466&q=80',
-      bidState: false,
+      itemState: false,
       description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
       timer: 1600723599125,
       timer_length: 180000000
@@ -100,7 +98,7 @@ function App() {
   useEffect(() => {
     axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
       .then(res => {
-        setTestingData(res.data);
+        SetItemData(res.data);
         console.log('get item scc,', res.data)
       })
       .catch(err => console.log(err));

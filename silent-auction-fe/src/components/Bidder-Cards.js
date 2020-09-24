@@ -75,7 +75,7 @@ const BidderCard = prop => {
                         <DataContainer>
 
                             <Price>
-                                {item.bidState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
+                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
                                 <div>{item.description}</div>
