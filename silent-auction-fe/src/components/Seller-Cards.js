@@ -11,9 +11,8 @@ border: 1px #80808059 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
-margin: 1rem 0;
+margin: 1rem 0;`
 
-`
 const Page = styled.div`
 border: 2px #80808059 solid;
 align-items: baseline;
@@ -72,7 +71,7 @@ const SellerCard = prop => {
     // const item=prop.itemData.find(
     //     (itemId)=> (item.id)===prop.match.params.id
     // )
-
+    const id=1;
 
     const Prop = useContext(ItemContext);
 
@@ -95,7 +94,7 @@ const SellerCard = prop => {
 
     }
     const addItem=(e)=>{
-        push(`/sellers/1/item-form`);
+        push(`/sellers/${id}/item-form`);
     }
 
     return (

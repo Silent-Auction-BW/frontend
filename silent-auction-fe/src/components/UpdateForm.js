@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { axiosWithAuth } from '../axiosAuth';
 
 const initialItem = {
-    name: "",
+    item_name: "",
     price: "",
     imageUrl: "",
     description: ""
@@ -33,9 +33,9 @@ const UpdateForm=(props)=>{
     .get('https://bw-silent-auction-pt.herokuapp.com/items')
     
         .then((res)=>{
-            setItem(res.data[6]);
+            setItem(res.data[7]);
             
-            console.log("image",res.data[6].image_url);
+            console.log("image",res.data[7].image_url);
             console.log("item image")
         })
         .catch((err)=>{
@@ -90,10 +90,10 @@ const UpdateForm=(props)=>{
            
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                        name="name"
+                        name="item_name"
                         onChange={changeHandler}
-                        placeholder="name"
-                        value={item.name}
+                        placeholder={item.item_name}
+                        value={item.item_name}
                          />
                 <input type="number"
                         name="price"
