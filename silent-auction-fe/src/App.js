@@ -94,7 +94,7 @@ function App() {
   useEffect(() => {
     axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
       .then(res => {
-        SetItemData(res);
+        SetItemData(res.data);
         console.log('get item scc,', res)
       })
       .catch(err => console.log(err));
@@ -139,9 +139,6 @@ function App() {
             </NavLink>
           </ul>
         </NavBar>
-        {testingData.map((data, index) =>
-          <img key={index} src={data.img}></img>
-        )}
 
         <Switch>
 
