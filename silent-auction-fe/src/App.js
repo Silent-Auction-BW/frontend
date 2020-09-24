@@ -79,14 +79,14 @@ function App() {
     }
   ])
 
-  // useEffect(() => {
-  //   axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
-  //     .then(res => {
-  //       SetItemData(res);
-  //       console.log('get item scc,', res)
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [])
+  useEffect(() => {
+    axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
+      .then(res => {
+        SetItemData(res);
+        console.log('get item scc,', res)
+      })
+      .catch(err => console.log(err));
+  }, [])
 
   const [loginState, setLoginState] = useState(false);
 
@@ -122,7 +122,7 @@ function App() {
                 </>
             }
 
-            <NavLink exact to="/item-form">
+            <NavLink exact to="/sellers/:id/item-form">
               Add Item
             </NavLink>
           </ul>
@@ -134,7 +134,7 @@ function App() {
           <Route path="/signup" component={SignupForm} loginStateSetter={loginStateSetter}></Route>
           <PrivateRoute path="/BidderCard" component={BidderCard} />
           <PrivateRoute path="/SellerCard" component={SellerCard} />
-          <Route path="/item-form" component={ItemForm}></Route>
+          <Route path="/sellers/:id/item-form" component={ItemForm}></Route>
           <Route
             path="/update-item/:id"
             render={() => <UpdateForm item={itemData} setItem={SetItemData} />}
@@ -142,6 +142,7 @@ function App() {
 
 
         </Switch>
+        
       </div>
     </ItemContext.Provider>
   );

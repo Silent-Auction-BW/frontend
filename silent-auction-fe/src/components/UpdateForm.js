@@ -2,9 +2,10 @@ import React, { useState,useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
+import { axiosWithAuth } from '../axiosAuth';
 
 const initialItem = {
-    name: "",
+    item_name: "",
     price: "",
     imageUrl: "",
     description: ""
@@ -27,10 +28,15 @@ const UpdateForm=(props)=>{
     const {id}=useParams();
 
     useEffect(()=>{
-        axios
-        .get(`${id}`)
+       
+    axiosWithAuth()
+    .get('https://bw-silent-auction-pt.herokuapp.com/items')
+    
         .then((res)=>{
-            setItem(res.data);
+            setItem(res.data[7]);
+            
+            console.log("image",res.data[7].image_url);
+            console.log("item image")
         })
         .catch((err)=>{
             console.log("Error in Useffect",err);
@@ -69,7 +75,7 @@ const UpdateForm=(props)=>{
             if(reader.readyState===2){
                 setItem({
                    ...item,
-                    imageUrl:reader.result
+                    image_url:reader.result
                     
                 })
                 console.log("item",item);
@@ -84,10 +90,10 @@ const UpdateForm=(props)=>{
            
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                        name="name"
+                        name="item_name"
                         onChange={changeHandler}
-                        placeholder="name"
-                        value={item.name}
+                        placeholder={item.item_name}
+                        value={item.item_name}
                          />
                 <input type="number"
                         name="price"
@@ -104,13 +110,14 @@ const UpdateForm=(props)=>{
                          />
                */} 
               
-                  <Uploadimg src={item.imageUrl} alt="Upload Image"></Uploadimg>
+                  <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
                  
                <input type="file"
                     name="imageurl"
                     accept="image/*"
                     id="input"
-                    onChange={imageHandler}/>
+                    onChange={imageHandler}
+                    value={item.imageUrl}/>
                      
               
              

@@ -11,9 +11,8 @@ border: 1px #80808059 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
-margin: 1rem 0;
+margin: 1rem 0;`
 
-`
 const Page = styled.div`
 border: 2px #80808059 solid;
 align-items: baseline;
@@ -68,11 +67,11 @@ const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
     const { push } = useHistory();
     //Finding id of the itemList
-    /*
-    const item=prop.itemData.find(
-        (itemId)=> (item.id)===prop.match.params.id
-    )
-*/
+    
+    // const item=prop.itemData.find(
+    //     (itemId)=> (item.id)===prop.match.params.id
+    // )
+    const id=1;
 
     const Prop = useContext(ItemContext);
 
@@ -92,11 +91,15 @@ const SellerCard = prop => {
     }
     const editItem = (e) => {
         push(`/update-item/${itemData.id}`);
+
+    }
+    const addItem=(e)=>{
+        push(`/sellers/${id}/item-form`);
     }
 
     return (
         <Page>
-            <AddItemButton>Add Item</AddItemButton>
+            <AddItemButton onClick={addItem}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) =>
                     <Container key={index}>
@@ -112,12 +115,8 @@ const SellerCard = prop => {
 
                             <div>
                                 <Timer>{item.timer}</Timer>
-                                {/* <PlaceBid item={item} /> */}
-
-                                {/* <DateTimeForm /> */}
-
-
-                                <button onClick={editItem}>Edit</button>
+                             
+                                 <button onClick={editItem}>Edit</button> 
                                 <button onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
