@@ -101,10 +101,17 @@ function App() {
   }, [])
 
   const [loginState, setLoginState] = useState(false);
-
   const loginStateSetter = (state) => {
     setLoginState(state)
   }
+
+  const [loginData, setLoginData] = useState('');
+  const loginDataSetter = data => {
+
+    setLoginData(data)
+  }
+
+  useEffect(() => console.log('loginData Changes:', loginData), [loginData]);
 
   const handleLogout = () => {
     localStorage.setItem('token', '');
@@ -114,7 +121,12 @@ function App() {
   return (
 
     <ItemContext.Provider value={
-      { itemData: itemData, loginStateSetter: loginStateSetter }
+      {
+        itemData: itemData,
+        loginStateSetter: loginStateSetter,
+        loginDataSetter: loginDataSetter,
+        loginData: loginData
+      }
     }>
       <div className="App">
         <NavBar>
@@ -130,7 +142,7 @@ function App() {
                 <>
                   <Link to="/BidderCard">Bidder Dashboard</Link>
                   <Link to="/SellerCard">Seller Dashboard</Link>
-                  <Link onClick={handleLogout}>Logout</Link>
+                  <Link to="/login" onClick={handleLogout}>Logout</Link>
                 </>
             }
 

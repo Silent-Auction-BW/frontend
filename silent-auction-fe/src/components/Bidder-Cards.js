@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
 
 const Container = styled.div`
-border: 1px #80808059 solid;
+border: 1px #2c242459 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
@@ -68,14 +68,14 @@ const BidderCard = prop => {
     const bidHandler = (e) => {
 
     }
-    const handleOnChange=(e)=>{
-       if(
-        e.target.value>=itemData.price
-       ) {
-        console.log("itemhandle",itemData.price);
-       }
-        
-      //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
+    const handleOnChange = (e) => {
+        if (
+            e.target.value >= itemData.price
+        ) {
+            console.log("itemhandle", itemData.price);
+        }
+
+        //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
     }
 
     return (
@@ -99,13 +99,13 @@ const BidderCard = prop => {
                                 {/* <PlaceBid item={item}/> */}
                                 <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>}
-                           
-                               
+
+
                             </div>
                         </DataContainer>
                     </Container>
-    )
-}
+                )
+            }
         </Page >
     )
 
