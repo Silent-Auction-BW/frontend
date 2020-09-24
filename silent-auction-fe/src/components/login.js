@@ -145,6 +145,7 @@ const LoginForm = (props) => {
         console.log('seccuss login', res);
         localStorage.setItem('token', 'efeijife-fefeife-fefe');
         Prop.loginStateSetter(true);
+        Prop.loginDataSetter(res.data);
         console.log('props', props)
         res.data.seller_id
           ?
