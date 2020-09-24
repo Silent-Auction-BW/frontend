@@ -8,11 +8,13 @@ import DateTimeForm from "../components/DateTimeForm";
 import Timer from 'react-compound-timer';
 
 const Container = styled.div`
-border: 1px #2c242459 solid;
+background-color: #f4f9e9;
+border: 1px #f4f9e9 solid;
 border-radius: 10px;
-padding: 0 0 0.5rem ;
+padding: 0 0 0.5rem;
 max-width: 400px;
-margin: 1rem 0;`
+margin: 1rem 0;
+`;
 
 const Page = styled.div`
 border: 2px #80808059 solid;
@@ -24,13 +26,13 @@ flex-wrap: wrap;
 justify-content: space-evenly;
 `
 const ImageContainer = styled.img`
-
-max-width: 100%;
-max-hight: 1200px;
+width: 100%;
+height: 300px;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 `
 const DataContainer = styled.div`
+background-color: #f4f9e9;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
@@ -38,7 +40,7 @@ div{
     padding:.5rem;
 }
 
-`
+`;
 const TimerStyle = styled.div`
 border: 2px 0px green solid;
 border-radius: 100%;
@@ -55,9 +57,10 @@ max-width: 100%;
 `
 
 const AddItemButton = styled.button`
+background-color: #f4f9e9;
 width: 100%;
 padding: 1rem;
-border: 2px Pink solid;
+border: 2px #19647e solid;
 margin: .5rem 5rem;
 border-radius: 10px;
 font-weight: 600;
