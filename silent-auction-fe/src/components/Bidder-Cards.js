@@ -56,7 +56,7 @@ text-align: left;
 
 const BidderCard = prop => {
     const [itemData, setUserData] = useState([])
-
+    const [show, toggleShow] = useState(true);
 
     const Prop = useContext(ItemContext);
 
@@ -64,6 +64,19 @@ const BidderCard = prop => {
 
         setUserData(Prop.itemData)
     }, [])
+
+    const bidHandler = (e) => {
+
+    }
+    const handleOnChange=(e)=>{
+       if(
+        e.target.value>=itemData.price
+       ) {
+        console.log("itemhandle",itemData.price);
+       }
+        
+      //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
+    }
 
     return (
         <Page>
@@ -84,12 +97,16 @@ const BidderCard = prop => {
                             <div>
                                 <TimerStyle>{item.timer}</TimerStyle>
                                 {/* <PlaceBid item={item}/> */}
+                                <input key={index} type="number" onChange={handleOnChange} ></input>
+                                {show && <button>Hi there</button>}
+                           
+                               
                             </div>
                         </DataContainer>
                     </Container>
-                )
-            }
-        </Page>
+    )
+}
+        </Page >
     )
 
 
