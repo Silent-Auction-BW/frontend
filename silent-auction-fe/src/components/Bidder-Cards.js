@@ -104,18 +104,16 @@ const BidderCard = prop => {
         })
         setUserData(newArray);
         console.log(itemData)
+    }
+    const finalBid=(e,id)=>{
+        let bidItem=itemData.map(item=>{
+            if(item.item_id==id){
+               console.log(item);
+               
+            }
+            return item;
+        })
 
-
-        //Nandy's Code
-        // if(e.target.value>itemData[index].price){
-        //     setBidPrice(e.target.value)
-
-        //     console.log("Hi",bidPrice);
-        // }
-        // else{
-            
-        //     console.log("no hi",itemData[index].price);
-        // }
     }
 
 
@@ -143,7 +141,7 @@ const BidderCard = prop => {
                                  <input type="number" id= {index} name="Bidprice" onChange={e=>bidchange(e, item.item_id)} key={index}  /> 
                                  {
 
-                                    item.bidPrice>0 ? <button id={index} >edit</button>:null
+                                    item.bidPrice>0 ? <button id={index} onClick={e=>finalBid(e,item.item_id)} >edit</button>:null
 
                                  }
                                 

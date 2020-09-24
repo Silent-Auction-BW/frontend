@@ -5,7 +5,7 @@ import UploadImage from "./UploadImage";
 import DateTimeForm from "./DateTimeForm";
 import { axiosWithAuth } from '../axiosAuth';
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 
 const initialItem = {
@@ -48,6 +48,7 @@ const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
     const { id } = useParams();
+    const { push } = useHistory();
     console.log("id", id);
 
 
@@ -79,6 +80,7 @@ const ItemForm = () => {
         axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${id}/items`, item)
             .then(res => {
                 console.log('upload res', res)
+                push(`/sellercard`);
             }
             ).catch(err => console.log('err', err))
         // console.log("Item got posted", item);
