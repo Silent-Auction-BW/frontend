@@ -107,8 +107,12 @@ function App() {
 
   const [loginData, setLoginData] = useState('');
   const loginDataSetter = data => {
-
     setLoginData(data)
+  }
+
+  const [addingItem, setAddingItem] = useState(false);
+  const addingItemSetter = state => {
+    setAddingItem(state)
   }
 
   useEffect(() => console.log('loginData Changes:', loginData), [loginData]);
@@ -125,7 +129,8 @@ function App() {
         itemData: itemData,
         loginStateSetter: loginStateSetter,
         loginDataSetter: loginDataSetter,
-        loginData: loginData
+        loginData: loginData,
+        addingItemSetter: addingItemSetter
       }
     }>
       <div className="App">
