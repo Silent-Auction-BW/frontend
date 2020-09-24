@@ -14,7 +14,9 @@ const initialItem = {
     description: "",
     price: "",
     image_url: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
-    timer: ""
+    timer_length: 500000000,
+    timer: 1600723599125,
+    itemState: false
 };
 
 // const initialItem =  {
@@ -123,24 +125,24 @@ const ItemForm = () => {
     }
 
     return (
-      <Form>
-        <h1>Add Item</h1>
-        <form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            name="name"
-            onChange={changeHandler}
-            placeholder="Name"
-            value={item.name}
-          />
-          <Input
-            type="number"
-            name="price"
-            onChange={changeHandler}
-            placeholder="Price"
-            value={item.price}
-          />
-          {/*
+        <Form>
+            <h1>Add Item</h1>
+            <form onSubmit={handleSubmit}>
+                <Input
+                    type="text"
+                    name="name"
+                    onChange={changeHandler}
+                    placeholder="Name"
+                    value={item.name}
+                />
+                <Input
+                    type="number"
+                    name="price"
+                    onChange={changeHandler}
+                    placeholder="Price"
+                    value={item.price}
+                />
+                {/*
                 <input type="text"
                         name="imageUrl"
                         onChange={changeHandler}
@@ -149,29 +151,29 @@ const ItemForm = () => {
                          />
                */}
 
-          <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
+                <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
 
-          <input
-            type="file"
-            name="imageurl"
-            accept="image/*"
-            id="input"
-            onChange={imageHandler}
-            // style={{ color: "#19647E" }}
-          />
+                <input
+                    type="file"
+                    name="imageurl"
+                    accept="image/*"
+                    id="input"
+                    onChange={imageHandler}
+                // style={{ color: "#19647E" }}
+                />
 
-          <DateTimeForm item={item} setItem={SetItem} />
+                <DateTimeForm item={item} setItem={SetItem} />
 
-          <Input
-            type="text"
-            name="description"
-            onChange={changeHandler}
-            placeholder="Description"
-            value={item.description}
-          />
-          <button>Add Item</button>
-        </form>
-      </Form>
+                <Input
+                    type="text"
+                    name="description"
+                    onChange={changeHandler}
+                    placeholder="Description"
+                    value={item.description}
+                />
+                <button>Add Item</button>
+            </form>
+        </Form>
     );
 
 };
