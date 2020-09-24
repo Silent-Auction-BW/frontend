@@ -36,7 +36,7 @@ div{
 }
 
 `
-const Timer = styled.div`
+const TimerStyle = styled.div`
 border: 2px green solid;
 border-radius: 100%;
 `
@@ -86,18 +86,16 @@ const BidderCard = prop => {
                     <Container key={index}>
                         <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
-                            <Seller>
-                                <div>Seller: {item.seller_id}</div>
-                            </Seller>
+
                             <Price>
-                                {item.bidState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price.price}</div>}
+                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
                                 <div>{item.description}</div>
                             </Des>
 
                             <div>
-                                <Timer>{item.timer}</Timer>
+                                <TimerStyle>{item.timer}</TimerStyle>
                                 {/* <PlaceBid item={item}/> */}
                                 <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>}

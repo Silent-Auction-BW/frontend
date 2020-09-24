@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 
 
 const initialItem = {
-   // seller_id: '1',
-   item_name: "",
+    // seller_id: '1',
+    item_name: "",
     description: "",
     price: "",
     image_url: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
@@ -47,8 +47,8 @@ padding-top:30px;`
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
-    const {id}=useParams();
-    console.log("id",id);
+    const { id } = useParams();
+    console.log("id", id);
 
 
     const changeHandler = ev => {
@@ -76,9 +76,9 @@ const ItemForm = () => {
         console.log("Items", item);
         //Waiting for axios link to posted
         //  axios.post("",item);
-     axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${id}/items`, item)
+        axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${id}/items`, item)
             .then(res => {
-                console.log(res)
+                console.log('upload res', res)
             }
             ).catch(err => console.log('err', err))
         // console.log("Item got posted", item);
@@ -89,7 +89,7 @@ const ItemForm = () => {
         reader.onload = () => {
             // Ready state 0 means "EMPTY", Readystate 1 means "LOADING" readystate 2 means "DONE"
             if (reader.readyState === 2) {
-                console.log("image",reader.result)
+                console.log("image", reader.result)
                 SetItem({
                     ...item,
                     image_url: reader.result
@@ -100,7 +100,7 @@ const ItemForm = () => {
             }
         }
         reader.readAsDataURL(e.target.files[0])
-        console.log("image",reader.result)
+        console.log("image", reader.result)
         // SetItem({
         //     ...item,
         //     image_url: 'namd'
@@ -123,8 +123,8 @@ const ItemForm = () => {
                     placeholder="Price"
                     value={item.price}
                 />
-               
-               <Uploadimg src={item.image_url} alt="" id="img"  />
+
+                <Uploadimg src={item.image_url} alt="" id="img" />
                 <input type="file"
                     name="image_url"
                     accept="image/*"

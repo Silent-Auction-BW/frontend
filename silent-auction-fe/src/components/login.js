@@ -70,6 +70,19 @@ const formSchema = yup.object().shape({
 });
 
 const LoginForm = (props) => {
+
+  // this useEffect is a helpper so we don't have to login. You can delete it.
+  useEffect(() => {
+    localStorage.setItem('token', 'efeijife-fefeife-fefe');
+    history.push('/SellerCard');
+    Prop.loginStateSetter(true);
+  }, [])
+
+  // this useEffect is a helpper so we don't have to login. You can delete it.
+
+
+
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
@@ -117,6 +130,9 @@ const LoginForm = (props) => {
   const Prop = useContext(ItemContext);
 
   const login = e => {
+
+
+
     e.preventDefault();
 
     axiosWithAuth()
