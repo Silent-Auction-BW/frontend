@@ -101,7 +101,7 @@ const SellerCard = prop => {
 
     return (
         <Page>
-            <AddItemButton onClick={() => push("/item-form")}>Add Item</AddItemButton>
+            <AddItemButton onClick={() => push("/sellers/:id/item-form")}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) => {
 
