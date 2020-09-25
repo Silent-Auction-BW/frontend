@@ -165,7 +165,7 @@ function App() {
           <Route path="/signup" component={SignupForm} loginStateSetter={loginStateSetter}></Route>
           <PrivateRoute path="/BidderCard" component={BidderCard} />
           <PrivateRoute path="/SellerCard" component={SellerCard} />
-          <Route path="/sellers/:id/item-form" component={ItemForm}></Route>
+          <Route path="/item-form/" component={ItemForm}></Route>
           <Route
             path="/update-item/:id"
             render={() => <UpdateForm item={itemData} setItem={SetItemData} />}
