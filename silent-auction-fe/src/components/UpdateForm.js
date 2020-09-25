@@ -34,7 +34,7 @@ const UpdateForm=(props)=>{
     .get(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
     
         .then((res)=>{
-            setItem(res.data[0]);
+            setItem(res.data);
             
             console.log("image",res.data[0]);
             console.log("item image")
@@ -91,10 +91,10 @@ const UpdateForm=(props)=>{
            
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                        name="item_name"
+                        name="name"
                         onChange={changeHandler}
-                        placeholder={item.item_name}
-                        value={item.item_name}
+                        placeholder={item.name}
+                        value={item.name}
                          />
                 <input type="number"
                         name="price"

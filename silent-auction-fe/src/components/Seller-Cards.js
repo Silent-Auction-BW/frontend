@@ -8,7 +8,7 @@ import DateTimeForm from "../components/DateTimeForm";
 import Timer from "react-compound-timer";
 
 const Container = styled.div`
-border: 1px #2c242459 solid;
+border: 1px #80808059 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
@@ -70,22 +70,14 @@ const SellerCard = prop => {
     //Finding id of the itemList
 
     // const item=prop.itemData.find(
-    //     (itemId)=> (item.id)===prop.match.params.id
+    //     (itemId)=> (itemId.item_id)===prop.match.params.id
     // )
     const id = useParams();
 
     const Prop = useContext(ItemContext);
 
-
     useEffect(() => {
-        console.log('Prop.loginData.seller_id', Prop.loginData.seller_id)
-
-        setUserData(Prop.itemData.filter(data => {
-            // console.log('data.seller_id', data.seller_id);
-            const sellerId = Prop.loginData.seller_id ? Prop.loginData.seller_id : 999999;
-            // console.log('sellerId', sellerId)
-            return data.seller_id == sellerId;
-        }))
+        setUserData(Prop.itemData)
     }, [])
     const deleteItem = (e) => {
         e.preventDefault();
@@ -109,8 +101,7 @@ const SellerCard = prop => {
 
     return (
         <Page>
-            <AddItemButton onClick={() => push("/sellers/:id/item-form")}>Add Item</AddItemButton>
-            {itemData.length === 0 && <div>You don't have any items on sell yet...</div>}
+            <AddItemButton onClick={() => push("/item-form")}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) => {
 
@@ -130,12 +121,9 @@ const SellerCard = prop => {
                                 {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
-
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
-
-                                <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
-
+                
                             </Des>
 
                             <div>
