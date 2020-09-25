@@ -69,7 +69,11 @@ const Input = styled.input`
 
 const ItemForm = (props) => {
 
-const Button = styled.button`
+
+
+
+
+    const Button = styled.button`
   background-color: #28afb0;
   border: none;
   border-radius: 25px;
@@ -82,6 +86,8 @@ const Button = styled.button`
     background-color: #550c18;
   }
 `;
+
+
 
 
 
@@ -201,7 +207,7 @@ const Button = styled.button`
                     placeholder="Description"
                     value={item.description}
                 />
-                <br/>
+                <br />
                 <Button>Add Item</Button>
             </form>
         </Form>
