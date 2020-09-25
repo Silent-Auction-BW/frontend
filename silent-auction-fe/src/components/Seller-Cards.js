@@ -2,10 +2,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import DateTimeForm from "../components/DateTimeForm";
-import Timer from 'react-compound-timer';
+import Timer from "react-compound-timer";
 
 const Container = styled.div`
 box-shadow: 5px 5px 15px black;
@@ -78,50 +78,46 @@ const SellerCard = prop => {
     //Finding id of the itemList
 
     // const item=prop.itemData.find(
-    //     (itemId)=> (item.id)===prop.match.params.id
+    //     (itemId)=> (itemId.item_id)===prop.match.params.id
     // )
-    const id = 1;
+    const id = useParams();
 
     const Prop = useContext(ItemContext);
 
 
     useEffect(() => {
-        console.log('Prop.loginData.seller_id', Prop.loginData.seller_id)
-
-        setUserData(Prop.itemData.filter(data => {
-            // console.log('data.seller_id', data.seller_id);
-            const sellerId = Prop.loginData.seller_id ? Prop.loginData.seller_id : 999999;
-            // console.log('sellerId', sellerId)
-            return data.seller_id == sellerId;
-        }))
+        setUserData(Prop.itemData)
+        console.log("prope",Prop);
     }, [])
-    const deleteItem = (e) => {
+    const deleteItem = (e,itemId) => {
+        console.log("itemid",itemId);
         e.preventDefault();
         console.log(e.target);
         axios
-            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/14`)
+            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/${itemId}`)
             .then((res) => {
-                // prop.setUserData(res.data);
-                push(`/SellerCard`);
+              //  prop.setUserData(res.data);
+               // push(`/SellerCard`);
+               console.log(res);
+               
+               push(`/SellerCard`);
             })
             .catch((err) =>
                 console.log("delete error", err));
     }
+    const editItem = (e,itemId) => {
 
-
-    const editItem = (e) => {
-        push(`/update-item/${itemData.id}`);
+        push(`/update-item/${itemId}`);
 
     }
     const addItem = (e) => {
-        push(`/sellers/${id}/item-form`);
+        push(`/item-form/`);
     }
 
 
     return (
         <Page>
-            <AddItemButton onClick={() => push("/sellers/:id/item-form")}>Add Item</AddItemButton>
-            {itemData.length === 0 && <div>You don't have any items on sell yet...</div>}
+            <AddItemButton onClick={() => push("/item-form/")}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) => {
 
@@ -141,12 +137,12 @@ const SellerCard = prop => {
                                 {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
-
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
-
-                                <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
-
+                                <div>{item.item_id}</div>
+                                 <div>{item.seller_id}</div>
+                               
+                
                             </Des>
 
                             <div>
@@ -170,8 +166,8 @@ const SellerCard = prop => {
                                         }
                                     </Timer>
                                 </TimerStyle>
-                                <button onClick={editItem}>Edit</button>
-                                <button key={item.item_id} onClick={deleteItem}>Delete</button>
+                                <button onClick={e=>(editItem(e,item.item_id))}>Edit</button>
+                                <button onClick={e=>(deleteItem(e,item.item_id))}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>

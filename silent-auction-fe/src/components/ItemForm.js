@@ -150,10 +150,7 @@ const Button = styled.button`
         }
         reader.readAsDataURL(e.target.files[0])
         console.log("image", reader.result)
-        // SetItem({
-        //     ...item,
-        //     image_url: 'namd'
-        // })
+      
     }
 
     return (
