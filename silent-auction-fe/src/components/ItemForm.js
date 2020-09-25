@@ -37,6 +37,7 @@ const initialItem = {
 const Uploadimg = styled.img`
 width:200px;
 height: 200px;
+border: 2px solid #f4f9e9;
 `
 
 const Form = styled.div`
@@ -55,6 +56,8 @@ const Form = styled.div`
 `;
 
 const Input = styled.input`
+  max-width: 60%;
+  color: black;
   background-color: #f4f9e9;
   border: 1px solid #28afb0;
   border-radius: 5px;
@@ -63,7 +66,25 @@ const Input = styled.input`
   margin-top: 5px;
 `;
 
+
 const ItemForm = (props) => {
+
+const Button = styled.button`
+  background-color: #28afb0;
+  border: none;
+  border-radius: 25px;
+  color: #f4f9e9;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  padding: 3px 10px;
+
+  &:hover {
+    background-color: #550c18;
+  }
+`;
+
+
+
 
     const [item, SetItem] = useState(initialItem);
     // const { id } = useParams();
@@ -165,7 +186,7 @@ const ItemForm = (props) => {
 
                 <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
 
-                <input
+                <Input
                     type="file"
                     name="imageurl"
                     accept="image/*"
@@ -183,7 +204,8 @@ const ItemForm = (props) => {
                     placeholder="Description"
                     value={item.description}
                 />
-                <button>Add Item</button>
+                <br/>
+                <Button>Add Item</Button>
             </form>
         </Form>
     );

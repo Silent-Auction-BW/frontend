@@ -12,15 +12,49 @@ const initialItem = {
 };
 const Uploadimg = styled.img`
 width:200px;
-height: 200px;`
+height: 200px;
+border: 2px solid #f4f9e9;
+`
 
-const Form=styled.div`
-display: flex;
-flex-direction: column;
-width: 100%;
-max-width: 300px;
-margin: 0 auto;
-padding-top:30px;`
+const Form = styled.div`
+  box-shadow: 5px 5px 10px black;
+  background-color: #19647e;
+  border: 1px solid black;
+  color: #f4f9e9;
+  margin: 0 auto;
+  width: 300px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+  height: 500px;
+`;
+
+const Input = styled.input`
+  max-width: 60%;
+  color: black;
+  background-color: #f4f9e9;
+  border: 1px solid #28afb0;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+`;
+
+const Button = styled.button`
+  background-color: #28afb0;
+  border: none;
+  border-radius: 25px;
+  color: #f4f9e9;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  padding: 3px 10px;
+
+  &:hover {
+    background-color: #550c18;
+  }
+`;
 
 const UpdateForm=(props)=>{
     const {push}=useHistory();
@@ -87,15 +121,15 @@ const UpdateForm=(props)=>{
 
    return (
         <Form>
-           
+            <h1>Add Item</h1>           
             <form onSubmit={handleSubmit}>
-                <input type="text"
+                <Input type="text"
                         name="item_name"
                         onChange={changeHandler}
                         placeholder={item.item_name}
                         value={item.item_name}
                          />
-                <input type="number"
+                <Input type="number"
                         name="price"
                         onChange={changeHandler}
                         placeholder="Price"
@@ -112,7 +146,7 @@ const UpdateForm=(props)=>{
               
                   <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
                  
-               <input type="file"
+               <Input type="file"
                     name="imageurl"
                     accept="image/*"
                     id="input"
@@ -123,13 +157,14 @@ const UpdateForm=(props)=>{
              
                    
 
-                <input type="text"
+                <Input type="text"
                         name="description"
                         onChange={changeHandler}
                         placeholder="description"
                         value={item.description}
                          />
-                         <button>Add Item</button>
+                         <br/>
+                         <Button>Add Item</Button>
 
             </form>
 
