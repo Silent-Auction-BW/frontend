@@ -145,9 +145,19 @@ function App() {
                 </>
                 :
                 <>
-                  <Link to="/BidderCard">Bidder Dashboard</Link>
-                  <Link to="/SellerCard">Seller Dashboard</Link>
-                  <Link to="/login" onClick={handleLogout}>Logout</Link>
+                  {loginData.seller_id ?
+                    <>
+                      <Link to="/BidderCard">Bidder Dashboard</Link>
+                      <Link to="/SellerCard">Seller Dashboard</Link>
+                      <Link to="/login" onClick={handleLogout}>Logout</Link>
+                    </>
+                    :
+                    <>
+                      <Link to="/BidderCard">Bidder Dashboard</Link>
+
+                      <Link to="/login" onClick={handleLogout}>Logout</Link>
+                    </>
+                  }
                 </>
             }
 
