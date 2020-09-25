@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
 
 const Container = styled.div`
+box-shadow: 5px 5px 15px black;
 background-color: #f4f9e9;
 border: 1px #f4f9e9 solid;
 border-radius: 10px;

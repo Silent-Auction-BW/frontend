@@ -8,6 +8,7 @@ import DateTimeForm from "../components/DateTimeForm";
 import Timer from 'react-compound-timer';
 
 const Container = styled.div`
+box-shadow: 5px 5px 15px black;
 background-color: #f4f9e9;
 border: 1px #f4f9e9 solid;
 border-radius: 10px;
@@ -65,6 +66,10 @@ margin: .5rem 5rem;
 border-radius: 10px;
 font-weight: 600;
 
+&:hover {
+    background-color: #550c18;
+    color: #f4f9e9;
+}
 `
 
 const SellerCard = prop => {
