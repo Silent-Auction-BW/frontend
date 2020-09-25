@@ -2,6 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
+import Timer from 'react-compound-timer';
 
 const Container = styled.div`
 border: 1px #2c242459 solid;
@@ -37,8 +38,8 @@ div{
 
 `
 const TimerStyle = styled.div`
-border: 2px green solid;
-border-radius: 100%;
+
+
 `
 const Price = styled.div`
 display: flex;
@@ -82,8 +83,11 @@ const BidderCard = prop => {
         <Page>
 
             {
-                itemData.map((item, index) =>
-                    <Container key={index}>
+                itemData.map((item, index) => {
+                    const passedTime = Date.now() - item.timer;
+
+                    const remainedTime = item.timer_length - passedTime;
+                    return <Container key={index}>
                         <ImageContainer src={item.image_url} alt='item-imag' />
                         <DataContainer>
 
@@ -91,11 +95,32 @@ const BidderCard = prop => {
                                 {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
+                                <div>{item.item_name}</div>
                                 <div>{item.description}</div>
+                                <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
                             </Des>
+                            <TimerStyle>
+                                {/* <PlaceBid item={item} /> */}
 
+                                {/* <DateTimeForm /> */}
+                                <Timer
+                                    initialTime={remainedTime}
+                                    direction="backward"
+                                >
+                                    {
+                                        () => (
+                                            <>
+                                                <Timer.Days /> days
+                                                <Timer.Hours /> hours
+                                                <Timer.Minutes /> minutes
+                                                <Timer.Seconds /> seconds
+                                            </>
+                                        )
+                                    }
+                                </Timer>
+                            </TimerStyle>
                             <div>
-                                <TimerStyle>{item.timer}</TimerStyle>
+
                                 {/* <PlaceBid item={item}/> */}
                                 <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>}
@@ -104,7 +129,7 @@ const BidderCard = prop => {
                             </div>
                         </DataContainer>
                     </Container>
-                )
+                })
             }
         </Page >
     )

@@ -155,7 +155,7 @@ const SignupForm = (props) => {
             localStorage.setItem('token', 'efeijife-fefeife-fefe');
             Prop.loginStateSetter(true);
 
-            res.data.message.includes("seller") === true
+            res.data.seller_id
               ?
               props.history.push('/SellerCard')
               :
@@ -201,7 +201,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.username.length > 0 ? (
             <Error>{errorState.username}</Error>
-            ) : null}
+          ) : null}
           <br />
 
           <label htmlFor="password">
@@ -216,7 +216,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.password.length > 0 ? (
             <Error>{errorState.password}</Error>
-            ) : null}
+          ) : null}
           <br />
 
           {/* <label htmlFor="name">
@@ -244,7 +244,7 @@ const SignupForm = (props) => {
           </label>
           {errorState.email.length > 0 ? (
             <Error>{errorState.email}</Error>
-            ) : null}
+          ) : null}
           <br />
 
           <label htmlFor="role">
