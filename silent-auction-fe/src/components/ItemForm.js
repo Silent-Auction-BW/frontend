@@ -5,13 +5,9 @@ import UploadImage from "./UploadImage";
 import DateTimeForm from "./DateTimeForm";
 import { axiosWithAuth } from '../axiosAuth';
 import axios from "axios";
-<<<<<<< HEAD
-import { useHistory, useParams } from "react-router-dom";
-=======
 import { useParams } from "react-router-dom";
 import { ItemContext } from '../contexts/ItemContext';
 
->>>>>>> fe8aea8819d190352a5d48069bdfa0d6f72ea865
 
 
 const initialItem = {
@@ -70,17 +66,11 @@ const Input = styled.input`
 const ItemForm = () => {
 
     const [item, SetItem] = useState(initialItem);
-<<<<<<< HEAD
-    const { id } = useParams();
-    const { push } = useHistory();
-    console.log("id", id);
-=======
     // const { id } = useParams();
     // console.log("id", id);
 
 
     const Prop = useContext(ItemContext);
->>>>>>> fe8aea8819d190352a5d48069bdfa0d6f72ea865
 
 
     const changeHandler = ev => {

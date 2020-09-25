@@ -6,9 +6,12 @@ import { axiosWithAuth } from '../axiosAuth';
 
 const initialItem = {
     item_name: "",
+    description: "",
     price: "",
-    imageUrl: "",
-    description: ""
+    image_url: "",
+    timer_length: 500000000,
+    timer: 1600723599125,
+    itemState: false
 };
 const Uploadimg = styled.img`
 width:200px;
@@ -34,7 +37,7 @@ const UpdateForm=(props)=>{
     .get(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
     
         .then((res)=>{
-            setItem(res.data);
+            setItem(res.data[0]);
             
             console.log("image",res.data[0]);
             console.log("item image")
@@ -43,6 +46,7 @@ const UpdateForm=(props)=>{
             console.log("Error in Useffect",err);
         })
     },[id]);
+    
 
     const changeHandler=(ev)=>{
         ev.persist();
@@ -91,10 +95,10 @@ const UpdateForm=(props)=>{
            
             <form onSubmit={handleSubmit}>
                 <input type="text"
-                        name="name"
+                        name="item_name"
                         onChange={changeHandler}
-                        placeholder={item.name}
-                        value={item.name}
+                        placeholder={item.item_name}
+                        value={item.item_name}
                          />
                 <input type="number"
                         name="price"

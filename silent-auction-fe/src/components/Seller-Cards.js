@@ -76,22 +76,28 @@ const SellerCard = prop => {
 
     const Prop = useContext(ItemContext);
 
+
     useEffect(() => {
         setUserData(Prop.itemData)
+        console.log("prope",Prop);
     }, [])
-    const deleteItem = (e) => {
+    const deleteItem = (e,itemId) => {
+        console.log("itemid",itemId);
         e.preventDefault();
         axios
-            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`)
+            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/${itemId}`)
             .then((res) => {
-                prop.setUserData(res.data);
-                push(`/SellerCard`);
+              //  prop.setUserData(res.data);
+               // push(`/SellerCard`);
+               console.log(res);
+               push(`/SellerCard`);
             })
             .catch((err) =>
                 console.log("delete error", err));
     }
-    const editItem = (e) => {
-        push(`/update-item/${id}`);
+    const editItem = (e,itemId) => {
+
+        push(`/update-item/${itemId}`);
 
     }
     const addItem = (e) => {
@@ -101,7 +107,7 @@ const SellerCard = prop => {
 
     return (
         <Page>
-            <AddItemButton onClick={() => push("/item-form")}>Add Item</AddItemButton>
+            <AddItemButton onClick={() => push("/item-form/")}>Add Item</AddItemButton>
             {
                 itemData.map((item, index) => {
 
@@ -123,6 +129,9 @@ const SellerCard = prop => {
                             <Des>
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
+                                <div>{item.item_id}</div>
+                                 <div>{item.seller_id}</div>
+                               
                 
                             </Des>
 
@@ -147,8 +156,8 @@ const SellerCard = prop => {
                                         }
                                     </Timer>
                                 </TimerStyle>
-                                <button onClick={editItem}>Edit</button>
-                                <button onClick={deleteItem}>Delete</button>
+                                <button onClick={e=>(editItem(e,item.item_id))}>Edit</button>
+                                <button onClick={e=>(deleteItem(e,item.item_id))}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>
