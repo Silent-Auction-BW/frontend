@@ -90,6 +90,7 @@ const SellerCard = prop => {
               //  prop.setUserData(res.data);
                // push(`/SellerCard`);
                console.log(res);
+               
                push(`/SellerCard`);
             })
             .catch((err) =>
@@ -101,7 +102,7 @@ const SellerCard = prop => {
 
     }
     const addItem = (e) => {
-        push(`/sellers/${id}/item-form`);
+        push(`/item-form/`);
     }
 
 
