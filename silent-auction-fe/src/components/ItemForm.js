@@ -66,10 +66,14 @@ const Input = styled.input`
   margin-top: 5px;
 `;
 
-<<<<<<< HEAD
+
 const ItemForm = (props) => {
-=======
-const Button = styled.button`
+
+
+
+
+
+    const Button = styled.button`
   background-color: #28afb0;
   border: none;
   border-radius: 25px;
@@ -83,8 +87,10 @@ const Button = styled.button`
   }
 `;
 
-const ItemForm = () => {
->>>>>>> 0aa22c25550e2c1368fa4fd104d075e62d3c90d3
+
+
+
+
 
     const [item, SetItem] = useState(initialItem);
     // const { id } = useParams();
@@ -204,7 +210,7 @@ const ItemForm = () => {
                     placeholder="Description"
                     value={item.description}
                 />
-                <br/>
+                <br />
                 <Button>Add Item</Button>
             </form>
         </Form>
