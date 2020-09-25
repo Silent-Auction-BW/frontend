@@ -97,7 +97,7 @@ const BidderCard = prop => {
                 var pr=Number(el.price);
                 console.log(pr);
                 if(e.target.value>pr){
-                    el.bidPrice = e.target.value;
+                    el.price = e.target.value;
                 }
                 
             }
@@ -110,6 +110,7 @@ const BidderCard = prop => {
         let bidItem=itemData.map(item=>{
             if(item.item_id==id){
                console.log(item);
+              
                
             }
             return item;
@@ -166,7 +167,7 @@ const BidderCard = prop => {
                                  <input type="number" id= {index} name="Bidprice" onChange={e=>bidchange(e, item.item_id)} key={index}  /> 
                                  {
 
-                                    item.bidPrice>0 ? <button id={index} onClick={e=>finalBid(e,item.item_id)} >edit</button>:null
+                                    item.bidPrice>0 ? <button id={index} onClick={e=>finalBid(e,item.item_id)}>Bid</button>:null
 
                                  }
                                 
