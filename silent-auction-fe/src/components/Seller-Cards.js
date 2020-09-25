@@ -97,15 +97,18 @@ const SellerCard = prop => {
     }, [])
     const deleteItem = (e) => {
         e.preventDefault();
+        console.log(e.target);
         axios
-            .delete(``)
+            .delete(`https://bw-silent-auction-pt.herokuapp.com/items/14`)
             .then((res) => {
-                prop.setUserData(res.data);
-                /* */
+                // prop.setUserData(res.data);
+                push(`/SellerCard`);
             })
             .catch((err) =>
                 console.log("delete error", err));
     }
+
+
     const editItem = (e) => {
         push(`/update-item/${itemData.id}`);
 
@@ -168,7 +171,7 @@ const SellerCard = prop => {
                                     </Timer>
                                 </TimerStyle>
                                 <button onClick={editItem}>Edit</button>
-                                <button onClick={deleteItem}>Delete</button>
+                                <button key={item.item_id} onClick={deleteItem}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>

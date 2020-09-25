@@ -66,6 +66,9 @@ const Input = styled.input`
   margin-top: 5px;
 `;
 
+
+const ItemForm = (props) => {
+
 const Button = styled.button`
   background-color: #28afb0;
   border: none;
@@ -80,7 +83,8 @@ const Button = styled.button`
   }
 `;
 
-const ItemForm = () => {
+
+
 
     const [item, SetItem] = useState(initialItem);
     // const { id } = useParams();
@@ -105,13 +109,14 @@ const ItemForm = () => {
 
         SetItem({
             ...item,
-            [ev.target.name]: value
+            [ev.target.name]: value,
+            timer: Date.now()
         });
 
 
     };
 
-    useEffect(() => Prop.addingItemSetter(true))
+    useEffect(() => Prop.addingItemSetter(true), [])
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('seller id on itemForm:', Prop.loginData.seller_id)
@@ -121,6 +126,7 @@ const ItemForm = () => {
             .then(res => {
                 console.log('uploaded res', res)
                 Prop.addingItemSetter(false)
+                props.history.push('/SellerCard')
             }
             ).catch(err => console.log('err', err))
 
@@ -134,10 +140,11 @@ const ItemForm = () => {
                 console.log("image", reader.result)
                 SetItem({
                     ...item,
-                    image_url: reader.result
+                    image_url: reader.result,
+                    timer: Date.now()
 
                 })
-                console.log("item", item);
+
 
             }
         }
@@ -151,6 +158,7 @@ const ItemForm = () => {
 
     return (
         <Form>
+            {console.log("item", item)}
             <h1>Add Item</h1>
             <form onSubmit={handleSubmit}>
                 <Input
