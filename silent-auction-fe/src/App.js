@@ -154,6 +154,7 @@ function App() {
             <NavLink exact to="/sellers/:id/item-form">
               Add Item
             </NavLink>
+            <div>{loginData.seller_id && <>Seller ID: {loginData.seller_id}</>}</div>
           </ul>
         </NavBar>
 
