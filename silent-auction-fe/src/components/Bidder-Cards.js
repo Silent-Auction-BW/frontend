@@ -21,7 +21,6 @@ flex-wrap: wrap;
 justify-content: space-evenly;
 `
 const ImageContainer = styled.img`
-
 width: 100%;
 height: 300px;
 border-top-left-radius: 10px;
