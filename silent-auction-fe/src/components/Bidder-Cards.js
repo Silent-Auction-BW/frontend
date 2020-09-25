@@ -5,13 +5,14 @@ import { ItemContext } from '../contexts/ItemContext';
 import Timer from 'react-compound-timer';
 
 const Container = styled.div`
-border: 1px #2c242459 solid;
+box-shadow: 5px 5px 15px black;
+background-color: #f4f9e9;
+border: 1px #f4f9e9 solid;
 border-radius: 10px;
 padding: 0 0 0.5rem ;
 max-width: 400px;
 margin: 1rem 0;
-
-`
+`;
 const Page = styled.div`
 border: 2px #80808059 solid;
 align-items: baseline;
@@ -22,9 +23,8 @@ flex-wrap: wrap;
 justify-content: space-evenly;
 `
 const ImageContainer = styled.img`
-
-max-width: 100%;
-max-hight: 1200px;
+width: 100%;
+height: 300px;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 `
