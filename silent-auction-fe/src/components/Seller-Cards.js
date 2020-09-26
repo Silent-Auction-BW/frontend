@@ -28,7 +28,7 @@ justify-content: space-evenly;
 `
 const ImageContainer = styled.img`
 width: 100%;
-height: 300px;
+height: auto;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 `
@@ -87,25 +87,25 @@ const SellerCard = prop => {
 
     useEffect(() => {
         setUserData(Prop.itemData)
-        console.log("prope",Prop);
-    }, [])
-    const deleteItem = (e,itemId) => {
-        console.log("itemid",itemId);
+        console.log("ContextProp", Prop);
+    }, [Prop])
+    const deleteItem = (e, itemId) => {
+        console.log("itemid", itemId);
         e.preventDefault();
         console.log(e.target);
         axios
             .delete(`https://bw-silent-auction-pt.herokuapp.com/items/${itemId}`)
             .then((res) => {
-              //  prop.setUserData(res.data);
-               // push(`/SellerCard`);
-               console.log(res);
-               
-               push(`/SellerCard`);
+                //  prop.setUserData(res.data);
+                // push(`/SellerCard`);
+                console.log(res);
+                Prop.deletingItemSetter(true);
+                push(`/SellerCard`);
             })
             .catch((err) =>
                 console.log("delete error", err));
     }
-    const editItem = (e,itemId) => {
+    const editItem = (e, itemId) => {
 
         push(`/update-item/${itemId}`);
 
@@ -134,15 +134,15 @@ const SellerCard = prop => {
                         <DataContainer>
 
                             <Price>
-                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
+                                {item.itemState === true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
-                                <div>{item.item_id}</div>
-                                 <div>{item.seller_id}</div>
-                               
-                
+                                <div>Item ID: {item.item_id}</div>
+                                <div>Seller ID: {item.seller_id}</div>
+
+
                             </Des>
 
                             <div>
@@ -166,8 +166,8 @@ const SellerCard = prop => {
                                         }
                                     </Timer>
                                 </TimerStyle>
-                                <button onClick={e=>(editItem(e,item.item_id))}>Edit</button>
-                                <button onClick={e=>(deleteItem(e,item.item_id))}>Delete</button>
+                                <button onClick={e => (editItem(e, item.item_id))}>Edit</button>
+                                <button onClick={e => (deleteItem(e, item.item_id))}>Delete</button>
                             </div>
                         </DataContainer>
                     </Container>

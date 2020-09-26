@@ -7,7 +7,9 @@ import { axiosWithAuth } from '../axiosAuth';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ItemContext } from '../contexts/ItemContext';
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import { date } from "yup";
 
 
 const initialItem = {
@@ -16,22 +18,10 @@ const initialItem = {
     description: "",
     price: "",
     image_url: "https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg",
-    timer_length: 500000000,
-    timer: 1600723599125,
+    timer_length: Date.now(),
+    timer: Date.now(),
     itemState: false
 };
-
-// const initialItem =  {
-
-//     item_name: 'Apple',
-//     price: { bidState: true, price: 100 },
-//     item_description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
-//     img: 'https://i.ytimg.com/vi/Wn0Ze6VNqYM/maxresdefault.jpg',
-//     timer: '15:00 min',
-//     item_id: 0,
-//     seller_id: 'William',
-//     biderName: 'Tim'
-//   }
 
 
 const Uploadimg = styled.img`
@@ -118,15 +108,41 @@ const ItemForm = (props) => {
             [ev.target.name]: value,
             timer: Date.now()
         });
-
-
     };
+    const [selectedDisplay, setSelectedDisplay] = useState(Date.now());
+    const [timerLength, setTimerLength] = useState()
+    // const [calendarClose, setCalendarClose] = useState(false);
+    const handleCalendarClose = () => {
+
+        SetItem({
+            ...item,
+            timer_length: timerLength,
+            timer: Date.now()
+        });
+    }
+    // const handleCalendarOpen = () => setCalendarClose(false);
+    const datePickerChnangeHandler = e => {
+        console.log(e)
+        console.log(Date.parse(e));
+        console.log(Date.parse(e) - Date.now())
+        setTimerLength(Date.parse(e) - Date.now());
+        setSelectedDisplay(e);
+
+
+        // SetItem({
+        //     ...item,
+        //     timer_length: length,
+        //     timer: Date.now()
+        // });
+
+    }
+
 
     useEffect(() => Prop.addingItemSetter(true), [])
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('seller id on itemForm:', Prop.loginData.seller_id)
-        // console.log("Items", item);
+        console.log("Items", item);
 
         axios.post(`https://bw-silent-auction-pt.herokuapp.com/sellers/${Prop.loginData.seller_id}/items`, item)
             .then(res => {
@@ -156,12 +172,12 @@ const ItemForm = (props) => {
         }
         reader.readAsDataURL(e.target.files[0])
         console.log("image", reader.result)
-      
+
     }
 
     return (
         <Form>
-            {console.log("item", item)}
+            {console.log("item in itemForm", item)}
             <h1>Add Item</h1>
             <form onSubmit={handleSubmit}>
                 <Input
@@ -178,14 +194,8 @@ const ItemForm = (props) => {
                     placeholder="Price"
                     value={item.price}
                 />
-                {/*
-                <input type="text"
-                        name="imageUrl"
-                        onChange={changeHandler}
-                        placeholder="imageUrl"
-                        value={item.imageUrl}
-                         />
-               */}
+
+
 
                 <Uploadimg src={item.image_url} alt="Upload Image"></Uploadimg>
 
@@ -197,8 +207,19 @@ const ItemForm = (props) => {
                     onChange={imageHandler}
                 // style={{ color: "#19647E" }}
                 />
+                <div>When will the auction end?</div>
+                <DatePicker
+                    selected={selectedDisplay}
+                    onChange={datePickerChnangeHandler}
+                    onCalendarClose={handleCalendarClose}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={20}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm"
+                />
 
-                <DateTimeForm item={item} setItem={SetItem} />
+                {/* <DateTimeForm item={item} setItem={SetItem} /> */}
 
                 <Input
                     type="text"
