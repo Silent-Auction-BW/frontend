@@ -65,7 +65,7 @@ const BidderCard = prop => {
     useEffect(() => {
 
         setUserData(Prop.itemData)
-    }, [Prop.itemData])
+    }, [Prop])
 
     const bidHandler = (e) => {
 
