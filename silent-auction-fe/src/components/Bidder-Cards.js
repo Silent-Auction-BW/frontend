@@ -24,7 +24,7 @@ justify-content: space-evenly;
 `
 const ImageContainer = styled.img`
 width: 100%;
-height: 300px;
+height: auto;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 `
@@ -58,14 +58,14 @@ text-align: left;
 const BidderCard = prop => {
     const [itemData, setUserData] = useState([])
     const [show, toggleShow] = useState(false);
-    const[bidPrice,setBidPrice]=useState();
+    const [bidPrice, setBidPrice] = useState();
 
     const Prop = useContext(ItemContext);
 
     useEffect(() => {
 
         setUserData(Prop.itemData)
-    }, [])
+    }, [Prop.itemData])
 
     const bidHandler = (e) => {
 
@@ -76,42 +76,39 @@ const BidderCard = prop => {
     //    ) {
     //     console.log("itemhandle",itemData.price);
     //    }
-        
+
     //   //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
     // }
-    function toggle(button)
-    {
-      if(document.getElementById("1").value=="OFF")
-      {
-       document.getElementById("1").value="ON";
-      }
-      else
-      {
-        document.getElementById("1").value="OFF";
-      }
+    function toggle(button) {
+        if (document.getElementById("1").value === "OFF") {
+            document.getElementById("1").value = "ON";
+        }
+        else {
+            document.getElementById("1").value = "OFF";
+        }
     }
-    const bidchange=(e,id)=>{
-       
+    const bidchange = (e, id) => {
+
         let newArray = itemData.map(el => {
-            if(el.item_id == id){
-                var pr=Number(el.price);
+            if (el.item_id === id) {
+                var pr = Number(el.price);
                 console.log(pr);
-                if(e.target.value>pr){
+                if (e.target.value > pr) {
                     el.price = e.target.value;
                 }
-                
+
             }
             return el;
         })
         setUserData(newArray);
         console.log(itemData)
     }
-    const finalBid=(e,id)=>{
-        let bidItem=itemData.map(item=>{
-            if(item.item_id==id){
-               console.log(item);
-              
-               
+    const finalBid = (e, id) => {
+        let bidItem = itemData.map(item => {
+            if (item.item_id === id) {
+                console.log(item);
+
+
             }
             return item;
         })
@@ -132,11 +129,12 @@ const BidderCard = prop => {
                         <DataContainer>
 
                             <Price>
-                                {item.itemState == true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
+                                {item.itemState === true ? <><div>Current Bid: ${item.price}</div></> : <div>${item.price}</div>}
                             </Price>
                             <Des>
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
+                                <div>Item ID: {item.item_id}</div>
                                 <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
                             </Des>
                             <TimerStyle>
@@ -164,16 +162,16 @@ const BidderCard = prop => {
                                 {/* <PlaceBid item={item}/> */}
                                 {/* <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>} */}
-                                 <input type="number" id= {index} name="Bidprice" onChange={e=>bidchange(e, item.item_id)} key={index}  /> 
-                                 {
+                                <input type="number" id={index} name="Bidprice" onChange={e => bidchange(e, item.item_id)} key={index} />
+                                {
 
-                                    item.bidPrice>0 ? <button id={index} onClick={e=>finalBid(e,item.item_id)}>Bid</button>:null
+                                    item.bidPrice > 0 ? <button id={index} onClick={e => finalBid(e, item.item_id)}>Bid</button> : null
 
-                                 }
-                                
-                                </div>
-                                
-                                    
+                                }
+
+                            </div>
+
+
                         </DataContainer>
                     </Container>
                 })
