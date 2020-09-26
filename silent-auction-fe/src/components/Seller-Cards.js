@@ -71,6 +71,19 @@ font-weight: 600;
     color: #f4f9e9;
 }
 `
+const Button = styled.button`
+  background-color: #28AFB0;
+  border: none;
+  border-radius: 24px;
+  color: #F4F9E9;
+  font-size: 1.2rem;
+  margin: 10px 1rem;
+  padding: 3px 10px;
+
+  &:hover {
+    background-color: #550C18;
+  }
+`;
 
 const SellerCard = prop => {
     const [itemData, setUserData] = useState([]);
@@ -166,8 +179,8 @@ const SellerCard = prop => {
                                         }
                                     </Timer>
                                 </TimerStyle>
-                                <button onClick={e => (editItem(e, item.item_id))}>Edit</button>
-                                <button onClick={e => (deleteItem(e, item.item_id))}>Delete</button>
+                                <Button onClick={e => (editItem(e, item.item_id))}>Edit</Button>
+                                <Button onClick={e => (deleteItem(e, item.item_id))}>Delete</Button>
                             </div>
                         </DataContainer>
                     </Container>
