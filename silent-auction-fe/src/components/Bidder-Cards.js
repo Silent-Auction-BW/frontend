@@ -3,6 +3,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { ItemContext } from '../contexts/ItemContext';
 import Timer from 'react-compound-timer';
+import axios from "axios";
+import { axiosWithAuth } from '../axiosAuth';
+
 
 const Container = styled.div`
 box-shadow: 5px 5px 15px black;
@@ -65,31 +68,12 @@ const BidderCard = prop => {
     useEffect(() => {
 
         setUserData(Prop.itemData)
+        console.log("propbidder",itemData);
+        console.log("props_bidder",Prop);
     }, [])
 
-    const bidHandler = (e) => {
-
-    }
-    // const handleOnChange=(e)=>{
-    //    if(
-    //     e.target.value>=itemData.price
-    //    ) {
-    //     console.log("itemhandle",itemData.price);
-    //    }
-        
-    //   //  toggleShow(!show)}>toggle: {show ? 'show' : 'hide'}
-    // }
-    function toggle(button)
-    {
-      if(document.getElementById("1").value=="OFF")
-      {
-       document.getElementById("1").value="ON";
-      }
-      else
-      {
-        document.getElementById("1").value="OFF";
-      }
-    }
+    
+   
     const bidchange=(e,id)=>{
        
         let newArray = itemData.map(el => {
@@ -97,7 +81,7 @@ const BidderCard = prop => {
                 var pr=Number(el.price);
                 console.log(pr);
                 if(e.target.value>pr){
-                    el.price = e.target.value;
+                    el.bidPrice= e.target.value;
                 }
                 
             }
@@ -109,6 +93,16 @@ const BidderCard = prop => {
     const finalBid=(e,id)=>{
         let bidItem=itemData.map(item=>{
             if(item.item_id==id){
+console.log("ammount",item.bidPrice);
+              axios
+                .post(`https://silenta-auction-bw.vercel.app/items/2/bidder/3`,{ammout:item.bidPrice})
+                .then(res=>{
+                    console.log("result",res);
+                })
+                .catch(err=>{
+                    console.log("err",err);
+                })
+                
                console.log(item);
               
                
@@ -138,6 +132,8 @@ const BidderCard = prop => {
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
                                 <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
+               
+               
                             </Des>
                             <TimerStyle>
                                 {/* <PlaceBid item={item} /> */}

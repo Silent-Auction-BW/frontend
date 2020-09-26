@@ -96,11 +96,12 @@ const UpdateForm=(props)=>{
     const handleSubmit=(e)=>{
         e.preventDefault();
         axios
-        .put(`${id}`,item)
+        .put(`https://bw-silent-auction-pt.herokuapp.com/items/${id}`,item)
         .then((res)=>{
             console.log("Update item",res.data)
-            props.setItem(res.data);
-            push(`/item-list/${id}`);
+         //   props.setItem(res.data);
+           // push(`/item-list/${id}`);
+           push(`/SellerCard`)
         })
         .catch((err)=>{
             console.log("Update Form Error",err);

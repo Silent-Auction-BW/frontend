@@ -163,7 +163,7 @@ function App() {
 
           <Route path="/login" component={LoginForm} loginStateSetter={loginStateSetter}></Route>
           <Route path="/signup" component={SignupForm} loginStateSetter={loginStateSetter}></Route>
-          <PrivateRoute path="/BidderCard" component={BidderCard} />
+          <PrivateRoute path="/BidderCard" component={BidderCard}  />
           <PrivateRoute path="/SellerCard" component={SellerCard} />
           <Route path="/item-form/" component={ItemForm}></Route>
           <Route
