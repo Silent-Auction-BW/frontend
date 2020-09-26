@@ -99,6 +99,12 @@ function App() {
   const deletingItemSetter = state => {
     setdeletingItem(state)
   }
+
+  const history = useHistory();
+
+  useEffect(() => { history.push('/login') }, [])
+
+
   useEffect(() => {
     axiosWithAuth().get('https://bw-silent-auction-pt.herokuapp.com/items')
       .then(res => {
