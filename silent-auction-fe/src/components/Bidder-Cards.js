@@ -37,6 +37,20 @@ div{
 }
 
 `
+
+
+const InputStyle = styled.input`
+background-color: #f4f4f4;
+    border: none;
+    border-radius: 24px;
+    color: #F4F9E9;
+    font-size: 1.2rem;
+    margin: 10px 1rem;
+    padding: 3px 10px;
+    width: 100%;
+    border: 3px #28AFB0 solid;
+`
+
 const TimerStyle = styled.div`
 
 
@@ -162,7 +176,7 @@ const BidderCard = prop => {
                                 {/* <PlaceBid item={item}/> */}
                                 {/* <input key={index} type="number" onChange={handleOnChange} ></input>
                                 {show && <button>Hi there</button>} */}
-                                <input type="number" id={index} name="Bidprice" onChange={e => bidchange(e, item.item_id)} key={index} />
+                                <InputStyle type="number" id={index} name="Bidprice" onChange={e => bidchange(e, item.item_id)} key={index} />
                                 {
 
                                     item.bidPrice > 0 ? <button id={index} onClick={e => finalBid(e, item.item_id)}>Bid</button> : null
