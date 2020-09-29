@@ -149,7 +149,7 @@ const BidderCard = prop => {
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
                                 <div>Item ID: {item.item_id}</div>
-                                <div>{item.seller_id && <>Seller ID: {item.seller_id}</>}</div>
+
                             </Des>
                             <TimerStyle>
                                 {/* <PlaceBid item={item} /> */}

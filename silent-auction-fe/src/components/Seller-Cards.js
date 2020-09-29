@@ -153,7 +153,7 @@ const SellerCard = prop => {
                                 <div>{item.item_name}</div>
                                 <div>{item.description}</div>
                                 <div>Item ID: {item.item_id}</div>
-                                <div>Seller ID: {item.seller_id}</div>
+
 
 
                             </Des>
