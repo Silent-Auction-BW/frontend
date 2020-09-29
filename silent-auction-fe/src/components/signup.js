@@ -155,7 +155,7 @@ const SignupForm = (props) => {
             localStorage.setItem('token', 'efeijife-fefeife-fefe');
             Prop.loginStateSetter(true);
 
-            res.data.seller_id
+            res.data.message.indexOf('seller')
               ?
               props.history.push('/SellerCard')
               :
