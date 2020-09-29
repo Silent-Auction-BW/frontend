@@ -146,8 +146,8 @@ const LoginForm = (props) => {
         localStorage.setItem('token', 'efeijife-fefeife-fefe');
         Prop.loginStateSetter(true);
         Prop.loginDataSetter(res.data);
-        console.log('props', props)
-        res.data.seller_id
+        console.log('resLogin', res)
+        res.data.message.indexOf('seller')
           ?
           props.history.push('/SellerCard')
           :
