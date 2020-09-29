@@ -43,7 +43,7 @@ const InputStyle = styled.input`
 background-color: #f4f4f4;
     border: none;
     border-radius: 24px;
-    color: #F4F9E9;
+    color: #31332c;
     font-size: 1.2rem;
     margin: 10px 1rem;
     padding: 3px 10px;
@@ -115,12 +115,12 @@ const BidderCard = prop => {
             return el;
         })
         setUserData(newArray);
-        console.log(itemData)
+        console.log('itemData', itemData)
     }
     const finalBid = (e, id) => {
         let bidItem = itemData.map(item => {
             if (item.item_id === id) {
-                console.log(item);
+                console.log('item', item);
 
 
             }
